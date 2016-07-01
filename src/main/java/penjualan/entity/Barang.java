@@ -12,8 +12,8 @@ public class Barang {
     private String kodeKategori;
     private KategoriBarang kategori;
     private String nama;
-    private double harga;
-    private int jumlah;
+    private Double harga;
+    private Integer jumlah;
     private Boolean paket;
 
     public Boolean getPaket() {
