@@ -459,7 +459,7 @@ public class PemesananPembelianView extends javax.swing.JFrame {
         if (txtKodeBarang.getSelectedItem() != null) {
             Barang barang = daftarBarang.get(txtKodeBarang.getSelectedIndex());
             txtNamaBarang.setText(barang.getNama());
-            txtHarga.setText(barang.getHargaAsCurrency());
+            txtHarga.setText(barang.getHargaJualAsCurrency());
         } else {
             txtNamaBarang.setText("");
             txtHarga.setText(NumberFormat.getCurrencyInstance(Locale.getDefault()).format(0));

@@ -12,9 +12,18 @@ package penjualan.entity;
 public class DaftarSirkulasiBarang {
 
     private Barang barang;
+    private Integer stokBarangAwal;
     private Integer stokBarangKeluar;
     private Integer stokBarangMasuk;
     private Integer stokBarangSekarang;
+
+    public Integer getStokBarangAwal() {
+        return stokBarangAwal;
+    }
+
+    public void setStokBarangAwal(Integer stokBarangAwal) {
+        this.stokBarangAwal = stokBarangAwal;
+    }
 
     public Barang getBarang() {
         return barang;

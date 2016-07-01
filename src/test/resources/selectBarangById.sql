@@ -9,12 +9,14 @@
  */
 
 select 
-    b.kode_barang, 
-    b.nama_barang, 
-    b.harga, 
-    b.jumlah, 
+    b.kode, 
+    b.nama, 
+    b.harga_jual,
+    b.harga_beli,
+    b.jumlah ,
     b.paket, 
-    k.id_kategori, 
-    k.kategori
-from barang b JOIN kategori_brg k ON (b.id_kategori = k.id_kategori)
-WHERE b.kode_barang = 'PB01'
+    k.id,
+    k.kode,
+    k.nama
+from barang b JOIN kategori_brg k ON (b.id_kategori = k.id)
+WHERE b.kode = 'PB01'

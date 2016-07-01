@@ -12,7 +12,8 @@ public class Barang {
     private String kodeKategori;
     private KategoriBarang kategori;
     private String nama;
-    private Double harga;
+    private Double hargaJual;
+    private Double hargaBeli;
     private Integer jumlah;
     private Boolean paket;
 
@@ -54,24 +55,22 @@ public class Barang {
         this.nama = namaBarang;
     }
 
+    @Deprecated
     public double getHarga() {
-        return harga;
+        return hargaJual;
     }
 
-    public String getHargaAsCurrency() {
-        return StringConverter.getCurrency(harga);
-    }
-
+    @Deprecated
     public void setHarga(double harga) {
-        this.harga = harga;
+        this.hargaJual = harga;
     }
 
-    public int getJumlah() {
-        return jumlah;
+    public String getHargaJualAsCurrency() {
+        return StringConverter.getCurrency(hargaJual);
     }
 
-    public void setJumlah(int jumlah) {
-        this.jumlah = jumlah;
+    public String getHargaBeliAsCurrency() {
+        return StringConverter.getCurrency(hargaBeli);
     }
 
     public String getKode() {
@@ -96,6 +95,30 @@ public class Barang {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    public Double getHargaJual() {
+        return hargaJual;
+    }
+
+    public void setHargaJual(Double hargaJual) {
+        this.hargaJual = hargaJual;
+    }
+
+    public Double getHargaBeli() {
+        return hargaBeli;
+    }
+
+    public void setHargaBeli(Double hargaBeli) {
+        this.hargaBeli = hargaBeli;
+    }
+
+    public Integer getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(Integer jumlah) {
+        this.jumlah = jumlah;
     }
 
 }

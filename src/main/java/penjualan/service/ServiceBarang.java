@@ -31,7 +31,7 @@ public class ServiceBarang implements RepositoryBarang {
 
     @Override
     public Barang save(Barang value) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return value;
     }
 
     @Override
@@ -44,7 +44,8 @@ public class ServiceBarang implements RepositoryBarang {
         String sql = "select \n"
                 + "    b.kode_barang, \n"
                 + "    b.nama_barang, \n"
-                + "    b.harga, \n"
+                + "    b.harga_jual, \n"
+                + "    b.harga_beli, \n"
                 + "    b.jumlah, \n"
                 + "    b.paket, \n"
                 + "    k.id_kategori, \n"
@@ -59,13 +60,14 @@ public class ServiceBarang implements RepositoryBarang {
             Barang brg = new Barang();
             brg.setKode(rs.getString(1));
             brg.setNama(rs.getString(2));
-            brg.setHarga(rs.getDouble(3));
-            brg.setJumlah(rs.getInt(4));
-            brg.setPaket(rs.getBoolean(5));
+            brg.setHargaJual(rs.getDouble(3));
+            brg.setHargaBeli(rs.getDouble(4));
+            brg.setJumlah(rs.getInt(5));
+            brg.setPaket(rs.getBoolean(6));
 
             KategoriBarang k = new KategoriBarang();
-            k.setKode(rs.getString(6));
-            k.setNama(rs.getString(7));
+            k.setKode(rs.getString(7));
+            k.setNama(rs.getString(8));
             brg.setKategori(k);
 
             list.add(brg);
@@ -84,12 +86,13 @@ public class ServiceBarang implements RepositoryBarang {
         String sql = "select \n"
                 + "    b.kode_barang, \n"
                 + "    b.nama_barang, \n"
-                + "    b.harga, \n"
+                + "    b.harga_jual, \n"
+                + "    b.harga_beli, \n"
                 + "    b.jumlah, \n"
                 + "    b.paket, \n"
                 + "    k.id_kategori, \n"
                 + "    k.kategori\n"
-                + "from barang b JOIN kategori_brg k ON (b.id_kategori = k.id_kategori)\n"
+                + "from barang b JOIN kategori_brg k ON (b.id_kategori = k.id_kategori)"
                 + "WHERE b.kode_barang = ?";
 
         Connection connect = ds.getConnection();
@@ -98,18 +101,17 @@ public class ServiceBarang implements RepositoryBarang {
         ResultSet rs = st.executeQuery();
         Barang brg = null;
         if (rs.next()) {
-            brg = new Barang();
             brg.setKode(rs.getString(1));
             brg.setNama(rs.getString(2));
-            brg.setHarga(rs.getDouble(3));
-            brg.setJumlah(rs.getInt(4));
-            brg.setPaket(rs.getBoolean(5));
+            brg.setHargaJual(rs.getDouble(3));
+            brg.setHargaBeli(rs.getDouble(4));
+            brg.setJumlah(rs.getInt(5));
+            brg.setPaket(rs.getBoolean(6));
 
             KategoriBarang k = new KategoriBarang();
-            k.setKode(rs.getString(6));
-            k.setNama(rs.getString(7));
+            k.setKode(rs.getString(7));
+            k.setNama(rs.getString(8));
             brg.setKategori(k);
-
         }
 
         st.close();
