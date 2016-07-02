@@ -5,7 +5,6 @@
  */
 package penjualan.service;
 
-import penjualan.entity.Pelanggan;
 import penjualan.config.Koneksi;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
