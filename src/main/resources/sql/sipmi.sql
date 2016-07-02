@@ -195,7 +195,7 @@ ALTER TABLE penjualan_detail
 -- View statement
 --
 
-CREATE OR REPLACE VIEW v_barang_detail as
+CREATE OR REPLACE VIEW v_barang AS
 SELECT 
     b.kode as kode_barang,
     b.nama as nama_barang,
@@ -208,4 +208,40 @@ SELECT
     k.nama as nama_kategori_barang
 FROM barang b JOIN kategori_brg k ON (b.id_kategori = k.id);
 
+CREATE OR REPLACE VIEW v_pembelian AS
+SELECT 
+    b.id as id_pembelian, 
+    b.kode as kode_pembelian,
+    b.tgl as tanggal_pembelian,
+    p.id as kode_pemasok,
+    p.nama as nama_pemasok,
+    p.alamat as alamat_pemasok,
+    p.tlp as telp_pemasok
+FROM pembelian b JOIN pemasok p ON (b.id_pemasok = p.id);
+
+CREATE OR REPLACE VIEW v_pembelian_detail AS
+SELECT 
+    b.id as id_pembelian, 
+    b.kode as kode_pembelian,
+    b.tgl as tanggal_pembelian,
+    p.id as kode_pemasok,
+    p.nama as nama_pemasok,
+    p.alamat as alamat_pemasok,
+    p.tlp as telp_pemasok,
+    bd.id as id_pembelian_detail,
+    bd.harga as harga_pembelian,
+    bd.jumlah as jumlah_pembelian,
+    brg.kode as kode_barang,
+    brg.nama as nama_barang,
+    brg.harga_jual as harga_jual_barang,
+    brg.harga_beli as harga_beli_barang,
+    brg.jumlah as stok_barang,
+    brg.paket as barang_paketan,
+    kbrg.id as id_kategori_barang,
+    kbrg.kode as kode_ketegori_barang,
+    kbrg.nama as nama_kategori_barang
+FROM pembelian b JOIN pemasok p ON (b.id_pemasok = p.id)
+    JOIN pembelian_detail bd ON (b.id = bd.id_pembelian)
+    JOIN barang brg ON (bd.kode_barang = brg.kode)
+    JOIN kategori_brg kbrg ON (kbrg.id = brg.id_kategori)
 
