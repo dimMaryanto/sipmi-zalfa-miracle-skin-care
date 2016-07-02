@@ -7,10 +7,6 @@ package aplikasi.entity;
 
 import java.sql.Date;
 
-/**
- *
- * @author dimmaryanto
- */
 public class Pembelian {
 
     private Integer id;
