@@ -6,11 +6,16 @@
 package aplikasi.repository;
 
 import aplikasi.entity.KategoriBarang;
+import java.sql.SQLException;
 
 /**
  *
  * @author dimmaryanto
  */
-public interface RepoKategoriBarang extends BaseRepository<KategoriBarang, Integer>{
-    
+public interface RepoKategoriBarang extends BaseRepository<KategoriBarang, Integer> {
+
+    public KategoriBarang findByKode(String kode) throws SQLException;
+
+    public Boolean existsByKode(String kode) throws SQLException;
+
 }
