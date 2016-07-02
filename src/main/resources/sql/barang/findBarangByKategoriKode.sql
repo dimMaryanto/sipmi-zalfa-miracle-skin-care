@@ -7,6 +7,5 @@
  * Author:  dimmaryanto
  * Created: Jul 2, 2016
  */
-DELETE FROM barang;
-INSERT INTO barang (kode, id_kategori, nama, harga_jual, harga_beli, jumlah, paket)
-VALUES ('DW01', 2, 'Handbody', 75000, 70000, 0, 0);
+
+SELECT * FROM v_barang WHERE kode_kategori = 'PW';
