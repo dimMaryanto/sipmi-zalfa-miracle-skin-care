@@ -30,7 +30,7 @@ public class ServicePelanggan implements RepoPelanggan {
     @Override
     public Pelanggan save(Pelanggan p) throws SQLException {
         String sql = "INSERT INTO pelanggan (kode, nama, alamat, notlp, agen)\n"
-                + "VALUES (? , ?, ?, ?, ?)";
+                + "VALUES (?,?,?,?,?)";
 
         Connection connect = ds.getConnection();
         PreparedStatement ps = connect.prepareStatement(sql);
