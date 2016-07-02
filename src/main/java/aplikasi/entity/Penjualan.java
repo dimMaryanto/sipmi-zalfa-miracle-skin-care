@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package penjualan.entity;
+package aplikasi.entity;
 
 import java.sql.Date;
 
@@ -11,12 +11,11 @@ import java.sql.Date;
  *
  * @author dimmaryanto
  */
-@Deprecated
-public class PemesananPembelian {
+public class Penjualan {
 
     private String kode;
     private Date tgl;
-    private Pemasok pemasok;
+    private Pelanggan pelanggan;
 
     public String getKode() {
         return kode;
@@ -34,12 +33,12 @@ public class PemesananPembelian {
         this.tgl = tgl;
     }
 
-    public Pemasok getPemasok() {
-        return pemasok;
+    public Pelanggan getPelanggan() {
+        return pelanggan;
     }
 
-    public void setPemasok(Pemasok pemasok) {
-        this.pemasok = pemasok;
+    public void setPelanggan(Pelanggan pelanggan) {
+        this.pelanggan = pelanggan;
     }
 
 }

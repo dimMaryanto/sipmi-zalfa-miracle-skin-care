@@ -6,6 +6,7 @@ import penjualan.config.StringConverter;
  *
  * @author Lani
  */
+@Deprecated
 public class Barang {
 
     private String kode;

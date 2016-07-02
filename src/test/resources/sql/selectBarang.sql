@@ -9,13 +9,13 @@
  */
 
 select 
-    b.kode, 
-    b.nama, 
-    b.harga_jual,
-    b.harga_beli,
-    b.jumlah ,
-    b.paket, 
-    k.id,
-    k.kode,
-    k.nama
+    b.kode as kode_barang, 
+    b.nama as nama_barang, 
+    b.harga_jual as harga_jual,
+    b.harga_beli as harga_beli,
+    b.jumlah as jumlah_barang,
+    b.paket as barang_paketan, 
+    k.id as id_kategori,
+    k.kode kode_kategori,
+    k.nama as nama_kategori_barang
 from barang b JOIN kategori_brg k ON (b.id_kategori = k.id)

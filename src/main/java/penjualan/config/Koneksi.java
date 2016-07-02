@@ -19,6 +19,7 @@ public class Koneksi {
 
     private static Connection conn;
 
+    @Deprecated
     public static Connection getConnection() {
         if (conn == null) {
             try {

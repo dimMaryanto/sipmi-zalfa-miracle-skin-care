@@ -9,6 +9,7 @@ package penjualan.entity;
  *
  * @author dimmaryanto
  */
+@Deprecated
 public class PembelianDetail {
 
     private Pembelian pembelian;

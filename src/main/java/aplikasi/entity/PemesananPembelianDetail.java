@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package penjualan.entity;
+package aplikasi.entity;
 
 /**
  *
  * @author dimmaryanto
  */
-@Deprecated
 public class PemesananPembelianDetail {
 
     private Integer id;
-    private PemesananPembelian pesan;
+    private PesananPembelian pesananPembelian;
     private Barang barang;
-    private Double harga;
     private Integer jumlah;
 
     public Integer getId() {
@@ -26,12 +24,12 @@ public class PemesananPembelianDetail {
         this.id = id;
     }
 
-    public PemesananPembelian getPesan() {
-        return pesan;
+    public PesananPembelian getPesananPembelian() {
+        return pesananPembelian;
     }
 
-    public void setPesan(PemesananPembelian pesan) {
-        this.pesan = pesan;
+    public void setPesananPembelian(PesananPembelian pesananPembelian) {
+        this.pesananPembelian = pesananPembelian;
     }
 
     public Barang getBarang() {
@@ -40,14 +38,6 @@ public class PemesananPembelianDetail {
 
     public void setBarang(Barang barang) {
         this.barang = barang;
-    }
-
-    public Double getHarga() {
-        return harga;
-    }
-
-    public void setHarga(Double harga) {
-        this.harga = harga;
     }
 
     public Integer getJumlah() {

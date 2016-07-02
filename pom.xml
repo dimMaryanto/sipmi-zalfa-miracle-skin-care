@@ -35,7 +35,7 @@
             <groupId>com.toedter</groupId>
             <artifactId>jcalendar</artifactId>
             <version>1.4</version>
-        </dependency>
+        </dependency>        
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>dbcp</artifactId>

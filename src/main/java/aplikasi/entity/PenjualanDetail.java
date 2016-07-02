@@ -3,20 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package penjualan.entity;
+package aplikasi.entity;
 
 /**
  *
  * @author dimmaryanto
  */
-@Deprecated
 public class PenjualanDetail {
 
+    private Integer id;
     private Penjualan penjualan;
     private Barang barang;
     private Double harga;
     private Double diskon;
-    private int jumlah;
+    private Integer jumlah;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Penjualan getPenjualan() {
         return penjualan;
@@ -42,20 +50,20 @@ public class PenjualanDetail {
         this.harga = harga;
     }
 
+    public Integer getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(Integer jumlah) {
+        this.jumlah = jumlah;
+    }
+
     public Double getDiskon() {
         return diskon;
     }
 
     public void setDiskon(Double diskon) {
         this.diskon = diskon;
-    }
-
-    public int getJumlah() {
-        return jumlah;
-    }
-
-    public void setJumlah(int jumlah) {
-        this.jumlah = jumlah;
     }
 
 }

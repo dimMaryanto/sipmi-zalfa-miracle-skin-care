@@ -91,7 +91,6 @@ CREATE TABLE IF NOT EXISTS pesanan_pembelian_detail (
     id int PRIMARY KEY not null auto_increment,
     kode_pesanan varchar(15) NOT NULL,
     kode_barang varchar(5) NOT NULL,
-    harga double NOT NULL default 0,
     jumlah int NOT NULL default 0
 ) ENGINE=InnoDB;
 

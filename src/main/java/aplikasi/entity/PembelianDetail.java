@@ -3,27 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package penjualan.entity;
+package aplikasi.entity;
 
 /**
  *
  * @author dimmaryanto
  */
-@Deprecated
-public class PenjualanDetail {
+public class PembelianDetail {
 
-    private Penjualan penjualan;
+    private Integer id;
+    private Pembelian pembelian;
     private Barang barang;
     private Double harga;
-    private Double diskon;
-    private int jumlah;
+    private Integer jumlah;
 
-    public Penjualan getPenjualan() {
-        return penjualan;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPenjualan(Penjualan penjualan) {
-        this.penjualan = penjualan;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Pembelian getPembelian() {
+        return pembelian;
+    }
+
+    public void setPembelian(Pembelian pembelian) {
+        this.pembelian = pembelian;
     }
 
     public Barang getBarang() {
@@ -42,19 +49,11 @@ public class PenjualanDetail {
         this.harga = harga;
     }
 
-    public Double getDiskon() {
-        return diskon;
-    }
-
-    public void setDiskon(Double diskon) {
-        this.diskon = diskon;
-    }
-
-    public int getJumlah() {
+    public Integer getJumlah() {
         return jumlah;
     }
 
-    public void setJumlah(int jumlah) {
+    public void setJumlah(Integer jumlah) {
         this.jumlah = jumlah;
     }
 

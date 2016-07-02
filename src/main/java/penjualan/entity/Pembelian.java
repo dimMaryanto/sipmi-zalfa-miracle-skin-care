@@ -11,6 +11,7 @@ import java.sql.Date;
  *
  * @author dimmaryanto
  */
+@Deprecated
 public class Pembelian {
 
     private String kode;
