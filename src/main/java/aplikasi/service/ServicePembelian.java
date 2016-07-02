@@ -170,8 +170,22 @@ public class ServicePembelian implements RepoPembelian {
             ps.setInt(4, pd.getJumlah());
             ps.addBatch();
         }
+        ps.executeBatch();
+        ps.clearBatch();
+        ps.close();
+
+        sql = "UPDATE barang SET jumlah = ? WHERE kode = ?";
+        ps = connect.prepareStatement(sql);
+        for (PembelianDetail pd : listPembelian) {
+            Barang brg = pd.getBarang();
+            Integer stokSekarang = brg.getJumlah();
+            ps.setInt(1, stokSekarang + pd.getJumlah());
+            ps.setString(2, brg.getKode());
+            ps.addBatch();
+        }
 
         ps.executeBatch();
+        ps.clearBatch();
         ps.close();
         connect.close();
         return b;
