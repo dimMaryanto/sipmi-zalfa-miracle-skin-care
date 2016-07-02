@@ -9,7 +9,7 @@ package aplikasi.entity;
  *
  * @author dimmaryanto
  */
-public class PemesananPembelianDetail {
+public class PesananPembelianDetail {
 
     private Integer id;
     private PesananPembelian pesananPembelian;
