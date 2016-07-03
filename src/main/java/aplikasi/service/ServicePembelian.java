@@ -145,12 +145,17 @@ public class ServicePembelian implements RepoPembelian {
 
     @Override
     public void delete(Integer id) throws SQLException {
-        String sql = "DELETE FROM pembelian WHERE id = ?";
         Connection connect = ds.getConnection();
+        String sql = "DELETE FROM pembelian_detail WHERE id_pembelian = ?";
         PreparedStatement ps = connect.prepareStatement(sql);
         ps.setInt(1, id);
         ps.executeUpdate();
+        ps.close();
 
+        sql = "DELETE FROM pembelian WHERE id = ?";
+        ps = connect.prepareStatement(sql);
+        ps.setInt(1, id);
+        ps.executeUpdate();
         ps.close();
         connect.close();
     }
