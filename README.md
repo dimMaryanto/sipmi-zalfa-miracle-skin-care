@@ -7,6 +7,5 @@ Sistem Informasi Penjualan dan Management Inventory pada Zalfa Miracle Skin Care
   * port : 3306
   * username : root
   * password : admin
-  * Import sql file : ![Download sql file](/src/main/resources/sql/sipmi.sql)
+  * Import sql file : <a href="/src/main/resources/sql/sipmi.sql" download>Download file SQL</a>
 * Menjalankan Aplikasi
- 
