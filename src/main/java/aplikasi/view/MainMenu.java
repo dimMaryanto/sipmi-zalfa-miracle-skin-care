@@ -17,7 +17,7 @@ public class MainMenu extends javax.swing.JFrame {
     private static final long serialVersionUID = 1L;
 
     private void showLoginScreen() {
-        Login login = new Login(this, true);
+        Login login = new Login(this ,this, true);
         login.setTitle("SIPMI - Zalfa Miracle Skin Care");
         login.setLocationRelativeTo(null);
         login.setVisible(true);
@@ -206,6 +206,10 @@ public class MainMenu extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
         getContentPane().add(desktop, java.awt.BorderLayout.CENTER);
+
+        jMenuBar1.setAutoscrolls(true);
+        jMenuBar1.setMinimumSize(new java.awt.Dimension(320, 35));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(320, 35));
 
         mnuAplikasi.setText("Aplikasi");
 

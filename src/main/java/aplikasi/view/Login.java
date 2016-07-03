@@ -11,14 +11,20 @@ package aplikasi.view;
  */
 public class Login extends javax.swing.JDialog {
 
+    private static final long serialVersionUID = 1L;
+
+    private final MainMenu menuUtamaController;
+
     /**
      * Creates new form Login
+     * @param menuUtama
      * @param parent
      * @param modal
      */
-    public Login(java.awt.Frame parent, boolean modal) {
+    public Login(MainMenu menuUtama,java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.menuUtamaController = menuUtama;
     }
 
     /**
