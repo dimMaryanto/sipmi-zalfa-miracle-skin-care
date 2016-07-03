@@ -130,7 +130,23 @@ public class ServicePesananPembelian implements RepoPesananPembelian {
 
     @Override
     public void delete(String id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql;
+        PreparedStatement ps;
+        Connection connect = ds.getConnection();
+
+        sql = "DELETE FROM pesanan_pembelian_detail WHERE kode_pesanan = ?";
+        ps = connect.prepareStatement(sql);
+        ps.setString(1, id);
+        ps.executeUpdate();
+        ps.close();
+
+        sql = "DELETE FROM pesanan_pembelian WHERE kode = ?";
+        ps = connect.prepareStatement(sql);
+        ps.setString(1, id);
+        ps.executeUpdate();
+        ps.close();
+
+        connect.close();
     }
 
     @Override
