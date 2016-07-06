@@ -5,8 +5,12 @@
  */
 package aplikasi.view;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import aplikasi.view.menu.pelanggan.DaftarPelanggan;
+import aplikasi.view.pemasok.DaftarPemasok;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -17,10 +21,17 @@ public class MainMenu extends javax.swing.JFrame {
     private static final long serialVersionUID = 1L;
 
     private void showLoginScreen() {
-        Login login = new Login(this ,this, true);
+        Login login = new Login(this, this, true);
         login.setTitle("SIPMI - Zalfa Miracle Skin Care");
         login.setLocationRelativeTo(null);
         login.setVisible(true);
+    }
+
+    private void setInnerLayout(JInternalFrame internal) throws PropertyVetoException {
+        this.desktop.removeAll();
+        this.desktop.add(internal);        
+        internal.setMaximum(true);
+        internal.setVisible(true);
     }
 
     /**
@@ -42,8 +53,8 @@ public class MainMenu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnPelanggan = new javax.swing.JButton();
+        btnPemasok = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton3 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -91,28 +102,33 @@ public class MainMenu extends javax.swing.JFrame {
         jToolBar1.setAutoscrolls(true);
         jToolBar1.setFocusCycleRoot(true);
 
-        jButton1.setText("Pelanggan");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setMaximumSize(new java.awt.Dimension(200, 35));
-        jButton1.setMinimumSize(new java.awt.Dimension(200, 35));
-        jButton1.setPreferredSize(new java.awt.Dimension(200, 35));
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
-
-        jButton2.setText("Pemasok");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setMaximumSize(new java.awt.Dimension(200, 35));
-        jButton2.setMinimumSize(new java.awt.Dimension(200, 35));
-        jButton2.setPreferredSize(new java.awt.Dimension(200, 35));
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnPelanggan.setText("Pelanggan");
+        btnPelanggan.setFocusable(false);
+        btnPelanggan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPelanggan.setMaximumSize(new java.awt.Dimension(200, 35));
+        btnPelanggan.setMinimumSize(new java.awt.Dimension(200, 35));
+        btnPelanggan.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnPelanggan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPelanggan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnPelangganActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        jToolBar1.add(btnPelanggan);
+
+        btnPemasok.setText("Pemasok");
+        btnPemasok.setFocusable(false);
+        btnPemasok.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPemasok.setMaximumSize(new java.awt.Dimension(200, 35));
+        btnPemasok.setMinimumSize(new java.awt.Dimension(200, 35));
+        btnPemasok.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnPemasok.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPemasok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPemasokActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnPemasok);
         jToolBar1.add(jSeparator1);
 
         jButton3.setText("Kategori Barang");
@@ -285,18 +301,32 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnPemasokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPemasokActionPerformed
+        try {
+            DaftarPemasok view = new DaftarPemasok();
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnPemasokActionPerformed
 
     private void mniExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_mniExitActionPerformed
 
+    private void btnPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPelangganActionPerformed
+        try {
+            DaftarPelanggan view = new DaftarPelanggan();
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnPelangganActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPelanggan;
+    private javax.swing.JButton btnPemasok;
     private javax.swing.JDesktopPane desktop;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
