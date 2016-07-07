@@ -86,6 +86,11 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
         btnTambah.setMinimumSize(new java.awt.Dimension(120, 35));
         btnTambah.setPreferredSize(new java.awt.Dimension(120, 35));
         btnTambah.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnTambah);
 
         btnUbah.setText("Ubah");
@@ -221,6 +226,13 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        DataPemasok view = new DataPemasok(frame, true, this);
+        view.setResizable(false);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+    }//GEN-LAST:event_btnTambahActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

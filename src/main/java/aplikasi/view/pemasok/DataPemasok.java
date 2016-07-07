@@ -24,6 +24,7 @@ public class DataPemasok extends javax.swing.JDialog {
     private final RepoPemasok repo = new ServicePemasok(KoneksiDB.getDataSource());
     private Boolean update;
     private Pemasok pemasok;
+    private DaftarPemasok daftarPemasok;
 
     public Boolean isUpdate() {
         return update;
@@ -44,14 +45,24 @@ public class DataPemasok extends javax.swing.JDialog {
         initComponents();
         setUpdate(false);
         this.pemasok = new Pemasok();
+        this.daftarPemasok = null;
     }
 
-    public DataPemasok(java.awt.Frame parent, boolean modal, Pemasok p) {
+    public DataPemasok(java.awt.Frame parent, boolean modal, DaftarPemasok daftarPemasok) {
+        super(parent, modal);
+        initComponents();
+        setUpdate(false);
+        this.pemasok = new Pemasok();
+        this.daftarPemasok = daftarPemasok;
+    }
+
+    public DataPemasok(java.awt.Frame parent, boolean modal, Pemasok p, DaftarPemasok daftarPemasok) {
         super(parent, modal);
         initComponents();
         setUpdate(true);
         setFields(p);
         this.pemasok = p;
+        this.daftarPemasok = daftarPemasok;
     }
 
     private void setFields(Pemasok p) {
@@ -160,7 +171,7 @@ public class DataPemasok extends javax.swing.JDialog {
                         .addComponent(txtNama)
                         .addComponent(txtTelp, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +192,7 @@ public class DataPemasok extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -200,6 +211,9 @@ public class DataPemasok extends javax.swing.JDialog {
         if (isUpdate()) {
             try {
                 repo.update(pemasok);
+                if (daftarPemasok != null) {
+                    this.daftarPemasok.refreshData();
+                }
                 this.dispose();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Tidak dapat merubah data pemasok", getTitle(), JOptionPane.ERROR_MESSAGE);
@@ -208,6 +222,9 @@ public class DataPemasok extends javax.swing.JDialog {
         } else {
             try {
                 repo.save(pemasok);
+                if (daftarPemasok != null) {
+                    this.daftarPemasok.refreshData();
+                }
                 this.dispose();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Tidak dapat menyimpan data pemasok", getTitle(), JOptionPane.ERROR_MESSAGE);
