@@ -12,6 +12,7 @@ import aplikasi.service.ServicePelanggan;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -78,6 +79,15 @@ public class DataPelanggan extends javax.swing.JDialog {
         initComponents();
         setUpdate(true);
         setFields(p);
+        this.pelanggan = p;
+    }
+
+    public DataPelanggan(java.awt.Frame parent, boolean modal, Pelanggan p, DaftarPelanggan daftarPelanggan) {
+        super(parent, modal);
+        initComponents();
+        setUpdate(true);
+        setFields(p);
+        this.daftarPelanggan = daftarPelanggan;
         this.pelanggan = p;
     }
 
@@ -222,6 +232,7 @@ public class DataPelanggan extends javax.swing.JDialog {
                     daftarPelanggan.refreshDataTable();
                 }
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Tidak dapat menyimpan data baru pelanggan", "Data pelanggan", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(DataPelanggan.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
@@ -232,26 +243,11 @@ public class DataPelanggan extends javax.swing.JDialog {
                     daftarPelanggan.refreshDataTable();
                 }
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Tidak dapat menyimpan perubahan data pelanggan", "Data pelanggan", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(DataPelanggan.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            DataPelanggan dialog = new DataPelanggan(new javax.swing.JFrame(), true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent e) {
-                    System.exit(0);
-                }
-            });
-            dialog.setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKembali;

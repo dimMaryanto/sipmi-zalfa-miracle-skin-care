@@ -132,6 +132,11 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
         btnUbah.setMaximumSize(new java.awt.Dimension(120, 35));
         btnUbah.setMinimumSize(new java.awt.Dimension(120, 35));
         btnUbah.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahActionPerformed(evt);
+            }
+        });
         btnMenu.add(btnUbah);
 
         btnHapus.setText("Hapus");
@@ -140,6 +145,11 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
         btnHapus.setMaximumSize(new java.awt.Dimension(120, 35));
         btnHapus.setMinimumSize(new java.awt.Dimension(120, 35));
         btnHapus.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
         btnMenu.add(btnHapus);
 
         getContentPane().add(btnMenu, java.awt.BorderLayout.PAGE_END);
@@ -300,9 +310,8 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableViewMouseClicked
-        Integer rowSelected = tableView.getSelectedRow();
-        if (rowSelected >= 0) {
-            Pelanggan p = daftarPelanggan.get(rowSelected);
+        if (tableController.isSelected()) {
+            Pelanggan p = daftarPelanggan.get(tableController.getRowSelected());
             setFields(p);
         } else {
             clearFields();
@@ -321,6 +330,32 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
         view.setLocationRelativeTo(null);
         view.setVisible(true);
     }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
+        if (tableController.isSelected()) {
+            Pelanggan pelanggan = daftarPelanggan.get(tableController.getRowSelected());
+            DataPelanggan view = new DataPelanggan(frame, true, pelanggan, this);
+            view.setLocationRelativeTo(null);
+            view.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Data pelanggan belum dipilih!", getTitle(), JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnUbahActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        if (tableController.isSelected()) {
+            Pelanggan p = daftarPelanggan.get(tableController.getRowSelected());
+            try {
+                repo.delete(p.getKode());
+                refreshDataTable();
+                clearFields();
+                JOptionPane.showMessageDialog(this, "Data pelanggan berhasil dihapus", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Data pelanggan tidak dapat dihapus", getTitle(), JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(DaftarPelanggan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

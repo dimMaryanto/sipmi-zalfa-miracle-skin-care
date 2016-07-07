@@ -40,4 +40,12 @@ public class TableViewController {
         this.model.fireTableDataChanged();
     }
 
+    public Integer getRowSelected() {
+        return table.getSelectedRow();
+    }
+
+    public Boolean isSelected() {
+        return getRowSelected() >= 0;
+    }
+
 }
