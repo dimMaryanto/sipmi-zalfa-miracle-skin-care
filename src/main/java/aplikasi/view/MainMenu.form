@@ -45,53 +45,56 @@
             <Property name="text" type="java.lang.String" value="Master Data"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="mniPelanggan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pelanggan"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniPelangganActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="mniPemasok">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pemasok"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator5">
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="mniKategoriBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Kategori Barang"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+            <MenuItem class="javax.swing.JMenuItem" name="mniBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Barang"/>
               </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
+        <Menu class="javax.swing.JMenu" name="mnuTransaksi">
           <Properties>
             <Property name="text" type="java.lang.String" value="Transaksi"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+            <MenuItem class="javax.swing.JMenuItem" name="mniPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pembelian"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+            <MenuItem class="javax.swing.JMenuItem" name="mniPenjualan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Penjualan"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator6">
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+            <MenuItem class="javax.swing.JMenuItem" name="mniPesanPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesanan Pembelian"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+            <MenuItem class="javax.swing.JMenuItem" name="mniAmbilPesanPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Bayar Pesanan"/>
               </Properties>
@@ -103,22 +106,22 @@
             <Property name="text" type="java.lang.String" value="Laporan"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+            <MenuItem class="javax.swing.JMenuItem" name="mniLapPenjualan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Penjualan"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
+            <MenuItem class="javax.swing.JMenuItem" name="mniLapPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pembelian"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
+            <MenuItem class="javax.swing.JMenuItem" name="mniLapBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Barang"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
+            <MenuItem class="javax.swing.JMenuItem" name="mniLaporanSirkulasiBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sirkulasi Barang"/>
               </Properties>
