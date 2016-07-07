@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 
@@ -29,16 +30,20 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
     private final TableViewController tableController;
     private List<Pelanggan> daftarPelanggan;
     private final RepoPelanggan repo;
+    private final JFrame frame;
 
     /**
      * Creates new form DaftarPelanggan
+     *
+     * @param frame
      */
-    public DaftarPelanggan() {
+    public DaftarPelanggan(JFrame frame) {
         initComponents();
         this.tableController = new TableViewController(tableView);
         this.daftarPelanggan = new ArrayList<>();
         this.repo = new ServicePelanggan(KoneksiDB.getDataSource());
-        isiDataTabel();
+        this.frame = frame;
+        refreshDataTable();
     }
 
     private void setFields(Pelanggan p) {
@@ -61,7 +66,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
         this.txtStatus.setText("");
     }
 
-    private void isiDataTabel() {
+    public void refreshDataTable() {
         try {
             tableController.clearData();
             daftarPelanggan = repo.findAll();
@@ -114,6 +119,11 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
         btnTambah.setMaximumSize(new java.awt.Dimension(120, 35));
         btnTambah.setMinimumSize(new java.awt.Dimension(120, 35));
         btnTambah.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
         btnMenu.add(btnTambah);
 
         btnUbah.setText("Ubah");
@@ -305,6 +315,12 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
     private void txtCariCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCariCaretUpdate
         tableController.getSorter().setRowFilter(RowFilter.regexFilter(txtCari.getText()));
     }//GEN-LAST:event_txtCariCaretUpdate
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        DataPelanggan view = new DataPelanggan(frame, this, true);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+    }//GEN-LAST:event_btnTambahActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

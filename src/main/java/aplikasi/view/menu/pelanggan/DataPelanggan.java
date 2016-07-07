@@ -23,6 +23,7 @@ public class DataPelanggan extends javax.swing.JDialog {
     private final RepoPelanggan repo = new ServicePelanggan(KoneksiDB.getDataSource());
     private Boolean update;
     private Pelanggan pelanggan;
+    private DaftarPelanggan daftarPelanggan;
 
     public Boolean isUpdate() {
         return update;
@@ -42,6 +43,7 @@ public class DataPelanggan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setUpdate(false);
+        this.daftarPelanggan = null;
         try {
             StringBuilder sb;
             sb = new StringBuilder("PEL").append(String.format("%02d", repo.findAll().size() + 1));
@@ -52,7 +54,23 @@ public class DataPelanggan extends javax.swing.JDialog {
         } catch (SQLException ex) {
             Logger.getLogger(DataPelanggan.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    public DataPelanggan(java.awt.Frame parent, DaftarPelanggan daftarPelangganView, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setUpdate(false);
+        this.daftarPelanggan = daftarPelangganView;
+        try {
+            StringBuilder sb;
+            sb = new StringBuilder("PEL").append(String.format("%02d", repo.findAll().size() + 1));
+            this.pelanggan = new Pelanggan();
+            this.pelanggan.setKode(sb.toString());
+            this.pelanggan.setAgen(false);
+            txtKode.setText(pelanggan.getKode());
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPelanggan.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public DataPelanggan(java.awt.Frame parent, boolean modal, Pelanggan p) {
@@ -200,6 +218,9 @@ public class DataPelanggan extends javax.swing.JDialog {
             try {
                 repo.update(pelanggan);
                 dispose();
+                if (daftarPelanggan != null) {
+                    daftarPelanggan.refreshDataTable();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(DataPelanggan.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -207,6 +228,9 @@ public class DataPelanggan extends javax.swing.JDialog {
             try {
                 repo.save(pelanggan);
                 dispose();
+                if (daftarPelanggan != null) {
+                    daftarPelanggan.refreshDataTable();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(DataPelanggan.class.getName()).log(Level.SEVERE, null, ex);
             }

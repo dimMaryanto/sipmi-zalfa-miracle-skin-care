@@ -6,6 +6,7 @@
 package aplikasi.view;
 
 import aplikasi.view.menu.pelanggan.DaftarPelanggan;
+import aplikasi.view.menu.pelanggan.DataPelanggan;
 import aplikasi.view.pemasok.DaftarPemasok;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -312,12 +313,14 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_mniExitActionPerformed
 
     private void btnPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPelangganActionPerformed
-
+        DataPelanggan pelanggan = new DataPelanggan(this, true);
+        pelanggan.setLocationRelativeTo(null);
+        pelanggan.setVisible(true);
     }//GEN-LAST:event_btnPelangganActionPerformed
 
     private void mniPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPelangganActionPerformed
         try {
-            DaftarPelanggan view = new DaftarPelanggan();
+            DaftarPelanggan view = new DaftarPelanggan(this);
             setInnerLayout(view);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
