@@ -129,6 +129,11 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
         btnHapus.setMinimumSize(new java.awt.Dimension(120, 35));
         btnHapus.setPreferredSize(new java.awt.Dimension(120, 35));
         btnHapus.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnHapus);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_END);
@@ -296,6 +301,21 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Data pemasok belum dipilih", getTitle(), JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnUbahActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        if (tableController.isSelected()) {
+            try {
+                Pemasok p = daftarPemasok.get(tableController.getRowSelected());
+                repo.delete(p.getId());
+                refreshData();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Tidak dapat menghapus data pemasok", getTitle(), JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(DaftarPemasok.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Data pemasok belum dipilih", getTitle(), JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
