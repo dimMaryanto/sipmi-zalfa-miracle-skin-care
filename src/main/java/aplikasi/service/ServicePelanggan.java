@@ -85,7 +85,7 @@ public class ServicePelanggan implements RepoPelanggan {
             p.setNama(rs.getString("nama_pelanggan"));
             p.setAlamat(rs.getString("alamat_pelanggan"));
             p.setAgen(rs.getBoolean("sebagai_agen"));
-            p.setTlp(rs.getString("no_telephone"));
+            p.setTlp(rs.getString("no_telepone"));
             list.add(p);
         }
         ps.close();
