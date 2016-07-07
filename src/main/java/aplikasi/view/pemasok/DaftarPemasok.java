@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 
 /**
  *
@@ -35,6 +36,20 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
         this.frame = frame;
         this.tableController = new TableViewController(tableView);
         refreshData();
+    }
+
+    private void setFields(Pemasok p) {
+        txtKode.setText(p.getId().toString());
+        txtNama.setText(p.getNama());
+        txtAlamat.setText(p.getAlamat());
+        txtTelp.setText(p.getTlp());
+    }
+
+    private void clearFields() {
+        txtKode.setText("");
+        txtNama.setText("");
+        txtAlamat.setText("");
+        txtTelp.setText("");
     }
 
     public void refreshData() {
@@ -100,6 +115,11 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
         btnUbah.setMinimumSize(new java.awt.Dimension(120, 35));
         btnUbah.setPreferredSize(new java.awt.Dimension(120, 35));
         btnUbah.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnUbah);
 
         btnHapus.setText("Hapus");
@@ -125,6 +145,13 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Alamat");
 
+        txtKode.setEditable(false);
+
+        txtNama.setEditable(false);
+
+        txtTelp.setEditable(false);
+
+        txtAlamat.setEditable(false);
         txtAlamat.setColumns(20);
         txtAlamat.setRows(5);
         jScrollPane1.setViewportView(txtAlamat);
@@ -184,6 +211,11 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
                 "Kode", "Nama"
             }
         ));
+        tableView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableViewMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tableView);
         if (tableView.getColumnModel().getColumnCount() > 0) {
             tableView.getColumnModel().getColumn(0).setMinWidth(100);
@@ -192,6 +224,12 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
             tableView.getColumnModel().getColumn(1).setMinWidth(200);
             tableView.getColumnModel().getColumn(1).setPreferredWidth(200);
         }
+
+        txtCari.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtCariCaretUpdate(evt);
+            }
+        });
 
         jLabel5.setText("Cari");
 
@@ -233,6 +271,31 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
         view.setLocationRelativeTo(null);
         view.setVisible(true);
     }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void txtCariCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCariCaretUpdate
+        tableController.getSorter().setRowFilter(RowFilter.regexFilter(txtCari.getText()));
+    }//GEN-LAST:event_txtCariCaretUpdate
+
+    private void tableViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableViewMouseClicked
+        if (tableController.isSelected()) {
+            Pemasok pemasok = daftarPemasok.get(tableController.getRowSelected());
+            setFields(pemasok);
+        } else {
+            clearFields();
+        }
+    }//GEN-LAST:event_tableViewMouseClicked
+
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
+        if (tableController.isSelected()) {
+            Pemasok pemasok = daftarPemasok.get(tableController.getRowSelected());
+            DataPemasok view = new DataPemasok(frame, true, pemasok, this);
+            view.setLocationRelativeTo(null);
+            view.setResizable(false);
+            view.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Data pemasok belum dipilih", getTitle(), JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnUbahActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
