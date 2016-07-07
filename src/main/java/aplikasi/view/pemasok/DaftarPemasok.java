@@ -49,7 +49,6 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Tidak dapat mendapatkan data pemasok", getTitle(), JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(DaftarPemasok.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @SuppressWarnings("unchecked")

@@ -8,6 +8,7 @@ package aplikasi.view;
 import aplikasi.view.menu.pelanggan.DaftarPelanggan;
 import aplikasi.view.menu.pelanggan.DataPelanggan;
 import aplikasi.view.pemasok.DaftarPemasok;
+import aplikasi.view.pemasok.DataPemasok;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -305,7 +306,10 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPemasokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPemasokActionPerformed
-
+        DataPemasok view = new DataPemasok(this, true);
+        view.setResizable(false);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
     }//GEN-LAST:event_btnPemasokActionPerformed
 
     private void mniExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniExitActionPerformed
