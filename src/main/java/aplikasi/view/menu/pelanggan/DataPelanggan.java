@@ -74,14 +74,6 @@ public class DataPelanggan extends javax.swing.JDialog {
         }
     }
 
-    public DataPelanggan(java.awt.Frame parent, boolean modal, Pelanggan p) {
-        super(parent, modal);
-        initComponents();
-        setUpdate(true);
-        setFields(p);
-        this.pelanggan = p;
-    }
-
     public DataPelanggan(java.awt.Frame parent, boolean modal, Pelanggan p, DaftarPelanggan daftarPelanggan) {
         super(parent, modal);
         initComponents();
@@ -148,6 +140,11 @@ public class DataPelanggan extends javax.swing.JDialog {
         btnKembali.setMinimumSize(new java.awt.Dimension(120, 35));
         btnKembali.setPreferredSize(new java.awt.Dimension(120, 35));
         btnKembali.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKembaliActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnKembali);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_END);
@@ -248,6 +245,10 @@ public class DataPelanggan extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnKembaliActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKembali;

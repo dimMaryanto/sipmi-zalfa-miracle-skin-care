@@ -328,6 +328,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         DataPelanggan view = new DataPelanggan(frame, this, true);
         view.setLocationRelativeTo(null);
+        view.setResizable(false);
         view.setVisible(true);
     }//GEN-LAST:event_btnTambahActionPerformed
 
@@ -336,6 +337,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
             Pelanggan pelanggan = daftarPelanggan.get(tableController.getRowSelected());
             DataPelanggan view = new DataPelanggan(frame, true, pelanggan, this);
             view.setLocationRelativeTo(null);
+            view.setResizable(false);
             view.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Data pelanggan belum dipilih!", getTitle(), JOptionPane.WARNING_MESSAGE);

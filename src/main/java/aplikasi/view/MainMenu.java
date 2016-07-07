@@ -250,6 +250,11 @@ public class MainMenu extends javax.swing.JFrame {
         mnuMasterData.add(mniPelanggan);
 
         mniPemasok.setText("Pemasok");
+        mniPemasok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPemasokActionPerformed(evt);
+            }
+        });
         mnuMasterData.add(mniPemasok);
         mnuMasterData.add(jSeparator5);
 
@@ -300,12 +305,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPemasokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPemasokActionPerformed
-        try {
-            DaftarPemasok view = new DaftarPemasok();
-            setInnerLayout(view);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }//GEN-LAST:event_btnPemasokActionPerformed
 
     private void mniExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniExitActionPerformed
@@ -315,6 +315,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void btnPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPelangganActionPerformed
         DataPelanggan pelanggan = new DataPelanggan(this, true);
         pelanggan.setLocationRelativeTo(null);
+        pelanggan.setResizable(false);
         pelanggan.setVisible(true);
     }//GEN-LAST:event_btnPelangganActionPerformed
 
@@ -326,6 +327,15 @@ public class MainMenu extends javax.swing.JFrame {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mniPelangganActionPerformed
+
+    private void mniPemasokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPemasokActionPerformed
+        try {
+            DaftarPemasok view = new DaftarPemasok(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mniPemasokActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPelanggan;

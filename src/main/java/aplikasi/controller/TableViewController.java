@@ -25,6 +25,7 @@ public class TableViewController {
         this.model = (DefaultTableModel) table.getModel();
         this.sorter = new TableRowSorter<>(model);
         this.table.setRowSorter(sorter);
+        clearData();
     }
 
     public DefaultTableModel getModel() {
