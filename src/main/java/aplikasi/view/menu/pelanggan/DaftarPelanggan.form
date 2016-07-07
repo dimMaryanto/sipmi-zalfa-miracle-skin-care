@@ -126,6 +126,10 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCari">
+          <Events>
+            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtCariCaretUpdate"/>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="txtCariPropertyChange"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

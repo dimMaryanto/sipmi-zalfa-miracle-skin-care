@@ -6,6 +6,7 @@
 package aplikasi.view.menu.pelanggan;
 
 import aplikasi.config.KoneksiDB;
+import aplikasi.controller.TableViewController;
 import aplikasi.entity.Pelanggan;
 import aplikasi.repository.RepoPelanggan;
 import aplikasi.service.ServicePelanggan;
@@ -15,8 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.RowFilter;
 
 /**
  *
@@ -26,7 +26,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
 
-    private final DefaultTableModel model;
+    private final TableViewController tableController;
     private List<Pelanggan> daftarPelanggan;
     private final RepoPelanggan repo;
 
@@ -35,7 +35,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
      */
     public DaftarPelanggan() {
         initComponents();
-        this.model = (DefaultTableModel) tableView.getModel();
+        this.tableController = new TableViewController(tableView);
         this.daftarPelanggan = new ArrayList<>();
         this.repo = new ServicePelanggan(KoneksiDB.getDataSource());
         isiDataTabel();
@@ -46,7 +46,11 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
         this.txtNama.setText(p.getNama());
         this.txtTelp.setText(p.getTlp());
         this.txtAlamat.setText(p.getAlamat());
-        this.txtStatus.setText("");
+        if (p.getAgen()) {
+            this.txtStatus.setText("Agen");
+        } else {
+            this.txtStatus.setText("Non Agen");
+        }
     }
 
     private void clearFields() {
@@ -57,18 +61,13 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
         this.txtStatus.setText("");
     }
 
-    private void bersihkanTemp() {
-        this.model.getDataVector().removeAllElements();
-        this.model.fireTableDataChanged();
-    }
-
     private void isiDataTabel() {
         try {
-            bersihkanTemp();
+            tableController.clearData();
             daftarPelanggan = repo.findAll();
             for (Pelanggan p : daftarPelanggan) {
                 Object[] row = {p.getKode(), p.getNama()};
-                this.model.addRow(row);
+                tableController.getModel().addRow(row);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Tidak dapat menampilkan data pelanggan", "Daftar Pelanggan", JOptionPane.ERROR_MESSAGE);
@@ -137,6 +136,17 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
         getContentPane().add(btnMenu, java.awt.BorderLayout.PAGE_END);
 
         btnCari.setText("Cari");
+
+        txtCari.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtCariCaretUpdate(evt);
+            }
+        });
+        txtCari.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtCariPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -295,7 +305,6 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
 
     private void tableViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableViewMouseClicked
         Integer rowSelected = tableView.getSelectedRow();
-        System.out.println("Tabel di klik pada baris " + rowSelected);
         if (rowSelected >= 0) {
             Pelanggan p = daftarPelanggan.get(rowSelected);
             setFields(p);
@@ -303,6 +312,13 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
             clearFields();
         }
     }//GEN-LAST:event_tableViewMouseClicked
+
+    private void txtCariPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtCariPropertyChange
+    }//GEN-LAST:event_txtCariPropertyChange
+
+    private void txtCariCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCariCaretUpdate
+        tableController.getSorter().setRowFilter(RowFilter.regexFilter(txtCari.getText()));
+    }//GEN-LAST:event_txtCariCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
