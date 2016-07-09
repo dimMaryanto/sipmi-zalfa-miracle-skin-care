@@ -13,6 +13,9 @@ import aplikasi.view.menu.pelanggan.DaftarPelangganView;
 import aplikasi.view.menu.pelanggan.DataPelangganView;
 import aplikasi.view.menu.pemasok.DaftarPemasokView;
 import aplikasi.view.menu.pemasok.DataPemasokView;
+import aplikasi.view.menu.pemesanan.pembelian.DaftarPemesananPembelianView;
+import aplikasi.view.menu.pemesanan.pembelian.DataPemesananPembelianDetailView;
+import aplikasi.view.menu.pemesanan.pembelian.DataPemesananPembelianView;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +36,7 @@ public class MainMenuView extends javax.swing.JFrame {
         login.setVisible(true);
     }
 
-    private void setInnerLayout(JInternalFrame internal) throws PropertyVetoException {
+    public void setInnerLayout(JInternalFrame internal) throws PropertyVetoException {
         this.desktop.removeAll();
         this.desktop.add(internal);
         internal.setMaximum(true);
@@ -184,6 +187,11 @@ public class MainMenuView extends javax.swing.JFrame {
         btnPesananPembelian.setMinimumSize(new java.awt.Dimension(200, 35));
         btnPesananPembelian.setPreferredSize(new java.awt.Dimension(200, 35));
         btnPesananPembelian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPesananPembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesananPembelianActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnPesananPembelian);
 
         btnBayarPesananPembelian.setText("Ambil Pesanan Pembelian");
@@ -301,6 +309,11 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuTransaksi.add(jSeparator6);
 
         mniPesanPembelian.setText("Pesanan Pembelian");
+        mniPesanPembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPesanPembelianActionPerformed(evt);
+            }
+        });
         mnuTransaksi.add(mniPesanPembelian);
 
         mniAmbilPesanPembelian.setText("Bayar Pesanan");
@@ -397,6 +410,24 @@ public class MainMenuView extends javax.swing.JFrame {
         view.setLocationRelativeTo(null);
         view.setVisible(true);
     }//GEN-LAST:event_btnBarangActionPerformed
+
+    private void mniPesanPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPesanPembelianActionPerformed
+        try {
+            DaftarPemesananPembelianView view = new DaftarPemesananPembelianView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mniPesanPembelianActionPerformed
+
+    private void btnPesananPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesananPembelianActionPerformed
+        try {
+            DataPemesananPembelianView view = new DataPemesananPembelianView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnPesananPembelianActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;

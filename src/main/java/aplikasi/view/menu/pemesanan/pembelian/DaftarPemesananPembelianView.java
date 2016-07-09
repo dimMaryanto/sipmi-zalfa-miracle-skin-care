@@ -5,16 +5,18 @@
  */
 package aplikasi.view.menu.pemesanan.pembelian;
 
+import aplikasi.view.MainMenuView;
+
 /**
  *
  * @author dimmaryanto
  */
 public class DaftarPemesananPembelianView extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form DaftarPemesananPembelianView
-     */
-    public DaftarPemesananPembelianView() {
+    private final MainMenuView menuController;
+
+    public DaftarPemesananPembelianView(MainMenuView menuController) {
+        this.menuController = menuController;
         initComponents();
     }
 

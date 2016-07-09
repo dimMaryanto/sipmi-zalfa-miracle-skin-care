@@ -14,6 +14,7 @@ import aplikasi.entity.PesananPembelian;
 import aplikasi.entity.PesananPembelianDetail;
 import aplikasi.repository.RepoBarang;
 import aplikasi.service.ServiceBarang;
+import aplikasi.view.MainMenuView;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,19 +51,13 @@ public class DataPemesananPembelianDetailView extends javax.swing.JDialog {
         refreshDataTable();
     }
 
-    /**
-     * Creates new form DataPemesananPembelianDetailView
-     *
-     * @param parent
-     * @param modal
-     */
-    public DataPemesananPembelianDetailView(java.awt.Frame parent, boolean modal, PesananPembelian beli) {
+    DataPemesananPembelianDetailView(java.awt.Frame parent, boolean modal, PesananPembelian pesanBarang, DataPemesananPembelianView pemesananPembelianController) {
         super(parent, modal);
         initComponents();
         this.tableController = new TableViewController(tableView);
         this.repoBarang = new ServiceBarang(KoneksiDB.getDataSource());
         this.pesan = new PesananPembelianDetail();
-        this.pesananPembelian = beli;
+        this.pesananPembelian = pesanBarang;
         this.pesan.setPesananPembelian(pesananPembelian);
         refreshDataTable();
     }
@@ -345,7 +340,7 @@ public class DataPemesananPembelianDetailView extends javax.swing.JDialog {
             Barang brg = daftarBarang.get(tableController.getRowSelected());
             this.pesan.setBarang(brg);
             this.pesan.setJumlah(Integer.valueOf(txtJumlah.getValue().toString()));
-            
+
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Barang belum dipilih", getTitle(), JOptionPane.WARNING_MESSAGE);

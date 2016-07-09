@@ -102,6 +102,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesanan Pembelian"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniPesanPembelianActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniAmbilPesanPembelian">
               <Properties>
@@ -353,6 +356,9 @@
                 </Property>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesananPembelianActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnBayarPesananPembelian">
               <Properties>
