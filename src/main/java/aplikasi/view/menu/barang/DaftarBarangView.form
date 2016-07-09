@@ -263,6 +263,7 @@
         <Component class="javax.swing.JTextField" name="txtJumlah">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPaket">
@@ -364,6 +365,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableViewMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

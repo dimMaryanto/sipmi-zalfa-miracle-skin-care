@@ -6,12 +6,15 @@
 package aplikasi.view.menu.barang;
 
 import aplikasi.config.KoneksiDB;
+import aplikasi.config.ValueFormatterFactory;
 import aplikasi.controller.TableViewController;
 import aplikasi.entity.Barang;
+import aplikasi.entity.KategoriBarang;
 import aplikasi.repository.RepoBarang;
 import aplikasi.service.ServiceBarang;
 import aplikasi.view.MainMenuView;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +30,7 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
     private final MainMenuView menuController;
     private final TableViewController tableController;
     private final RepoBarang repoBarang;
+    private List<Barang> daftarBarang = new ArrayList<>();
 
     public DaftarBarangView(MainMenuView menuController) {
         this.menuController = menuController;
@@ -39,7 +43,7 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
     public void refreshDataTables() {
         try {
             tableController.clearData();
-            List<Barang> daftarBarang = repoBarang.findAll();
+            this.daftarBarang = repoBarang.findAll();
             for (Barang brg : daftarBarang) {
                 Object[] row = {brg.getKode(), brg.getNama(), brg.getKategori().getKode()};
                 tableController.getModel().addRow(row);
@@ -48,7 +52,41 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Tidak dapat mendapatkan data barang", getTitle(), JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(DaftarBarangView.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    private void clearFields() {
+        txtKode.setText("");
+        txtNama.setText("");
+        txtKodeKetegori.setText("");
+        txtNamaKategori.setText("");
+        txtHargaBeli.setText("");
+        txtHargaJual.setText("");
+        txtJumlah.setText("");
+        txtPaket.setText("");
+    }
+
+    private void setFields(Barang brg) {
+        txtKode.setText(brg.getKode());
+        txtNama.setText(brg.getNama());
+
+        KategoriBarang kbrg = brg.getKategori();
+        if (kbrg == null) {
+            txtKodeKetegori.setText("");
+            txtNamaKategori.setText("");
+        } else {
+            txtKodeKetegori.setText(kbrg.getKode());
+            txtNamaKategori.setText(kbrg.getNama());
+        }
+
+        txtHargaBeli.setText(ValueFormatterFactory.getCurrency(brg.getHargaBeli()));
+        txtHargaJual.setText(ValueFormatterFactory.getCurrency(brg.getHargaJual()));
+        txtJumlah.setText(ValueFormatterFactory.getNumberBulat(brg.getJumlah()));
+
+        if (brg.getPaket()) {
+            txtPaket.setText("Paket");
+        } else {
+            txtPaket.setText("Satuan");
+        }
     }
 
     /**
@@ -155,6 +193,7 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
         txtHargaBeli.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         txtJumlah.setEditable(false);
+        txtJumlah.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         txtPaket.setEditable(false);
 
@@ -246,6 +285,11 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
                 "Kode", "Nama", "Kategori"
             }
         ));
+        tableView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableViewMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableView);
         if (tableView.getColumnModel().getColumnCount() > 0) {
             tableView.getColumnModel().getColumn(0).setMinWidth(80);
@@ -295,6 +339,15 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
     private void txtCariCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtCariCaretUpdate
         tableController.getSorter().setRowFilter(RowFilter.regexFilter(txtCari.getText()));
     }//GEN-LAST:event_txtCariCaretUpdate
+
+    private void tableViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableViewMouseClicked
+        if (tableController.isSelected()) {
+            Barang barang = daftarBarang.get(tableController.getRowSelected());
+            setFields(barang);
+        } else {
+            clearFields();
+        }
+    }//GEN-LAST:event_tableViewMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
