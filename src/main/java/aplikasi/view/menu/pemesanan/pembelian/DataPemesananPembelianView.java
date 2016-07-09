@@ -5,11 +5,25 @@
  */
 package aplikasi.view.menu.pemesanan.pembelian;
 
+import aplikasi.config.KoneksiDB;
+import aplikasi.config.ValueFormatterFactory;
+import aplikasi.controller.TableViewController;
+import aplikasi.entity.Pemasok;
 import aplikasi.entity.PesananPembelian;
+import aplikasi.entity.PesananPembelianDetail;
+import aplikasi.repository.RepoPemasok;
+import aplikasi.repository.RepoPesananPembelian;
+import aplikasi.service.ServicePemasok;
+import aplikasi.service.ServicePesananPembelian;
 import aplikasi.view.MainMenuView;
 import java.beans.PropertyVetoException;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,13 +31,58 @@ import java.util.logging.Logger;
  */
 public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
 
+    private final RepoPemasok repoPemasok;
+    private final RepoPesananPembelian repoPesananaPembelian;
     private final MainMenuView menuController;
-    
-    private PesananPembelian pesanBarang;
+    private final PesananPembelian pesanBarang;
+    private final List<PesananPembelianDetail> daftarBelajaan;
+    private final TableViewController tableController;
+    private List<Pemasok> daftarPemasok;
+
+    public void tambahBarangBelanjaan(PesananPembelianDetail belanja) {
+        this.daftarBelajaan.add(belanja);
+    }
 
     public DataPemesananPembelianView(MainMenuView menuController) {
         this.menuController = menuController;
+        this.pesanBarang = new PesananPembelian();
+        this.daftarBelajaan = new ArrayList<>();
+        this.daftarPemasok = new ArrayList<>();
+        this.repoPemasok = new ServicePemasok(KoneksiDB.getDataSource());
+        this.repoPesananaPembelian = new ServicePesananPembelian(KoneksiDB.getDataSource());
         initComponents();
+        refreshDataPemasok();
+        this.tableController = new TableViewController(tableView);
+    }
+
+    public void refreshDataTable() {
+        tableController.clearData();
+        for (PesananPembelianDetail belanja : daftarBelajaan) {
+            Object[] row = {belanja.getBarang().getKode(), belanja.getBarang().getNama(), belanja.getJumlah()};
+            tableController.getModel().addRow(row);
+        }
+    }
+
+    private void refreshDataPemasok() {
+        try {
+            txtKodePemasok.removeAllItems();
+            daftarPemasok = repoPemasok.findAll();
+            for (Pemasok pemasok : daftarPemasok) {
+                txtKodePemasok.addItem(pemasok.getId().toString());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPemesananPembelianView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void setFieldPemasok(Pemasok p) {
+        txtNamaPemasok.setText(p.getNama());
+        txtTelpPemasok.setText(p.getTlp());
+    }
+
+    private void clearFieldPemasok() {
+        txtNamaPemasok.setText("");
+        txtTelpPemasok.setText("");
     }
 
     /**
@@ -67,6 +126,11 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
         btnSimpan.setMinimumSize(new java.awt.Dimension(120, 35));
         btnSimpan.setPreferredSize(new java.awt.Dimension(120, 35));
         btnSimpan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnSimpan);
 
         btnKembali.setText("Kembali");
@@ -94,6 +158,11 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
         jLabel5.setText("Telp");
 
         txtKodePemasok.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtKodePemasok.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                txtKodePemasokItemStateChanged(evt);
+            }
+        });
 
         txtNamaPemasok.setEditable(false);
 
@@ -173,6 +242,11 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
         });
 
         btnHapusBarang.setText("Hapus");
+        btnHapusBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusBarangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -260,6 +334,30 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
             Logger.getLogger(DataPemesananPembelianView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnKembaliActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        this.pesanBarang.setTgl(Date.valueOf(ValueFormatterFactory.getDateSQL(txtTanggal.getDate())));
+        this.pesanBarang.setPemasok(daftarPemasok.get(txtKodePemasok.getSelectedIndex()));
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void txtKodePemasokItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtKodePemasokItemStateChanged
+        if (txtKodePemasok.getSelectedItem() != null) {
+            Pemasok pemasok = daftarPemasok.get(txtKodePemasok.getSelectedIndex());
+            setFieldPemasok(pemasok);
+        } else {
+            clearFieldPemasok();
+        }
+    }//GEN-LAST:event_txtKodePemasokItemStateChanged
+
+    private void btnHapusBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusBarangActionPerformed
+        if (tableController.isSelected()) {
+            PesananPembelianDetail pd = daftarBelajaan.get(tableController.getRowSelected());            
+            boolean remove = daftarBelajaan.remove(pd);
+            refreshDataTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Data Barang belanjaan belum pilih", getTitle(), JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnHapusBarangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

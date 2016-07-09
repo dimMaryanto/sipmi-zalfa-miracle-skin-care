@@ -6,8 +6,10 @@
 package aplikasi.config;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -33,4 +35,10 @@ public class ValueFormatterFactory {
         DateTimeFormatter dateFormater = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.getDefault());
         return dateFormater.format(date);
     }
+
+    public static String getDateSQL(Date date) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormatter.format(date);
+    }
+
 }

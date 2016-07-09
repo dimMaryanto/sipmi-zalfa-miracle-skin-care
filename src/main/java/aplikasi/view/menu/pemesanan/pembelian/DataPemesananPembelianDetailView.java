@@ -33,27 +33,13 @@ public class DataPemesananPembelianDetailView extends javax.swing.JDialog {
     private List<Barang> daftarBarang = new ArrayList<>();
     private final PesananPembelianDetail pesan;
     private final PesananPembelian pesananPembelian;
+    private final DataPemesananPembelianView pesananController;
 
-    /**
-     * Creates new form DataPemesananPembelianDetailView
-     *
-     * @param parent
-     * @param modal
-     */
-    public DataPemesananPembelianDetailView(java.awt.Frame parent, boolean modal) {
+    DataPemesananPembelianDetailView(java.awt.Frame parent, boolean modal, 
+            PesananPembelian pesanBarang, DataPemesananPembelianView pemesananPembelianController) {
         super(parent, modal);
         initComponents();
-        this.tableController = new TableViewController(tableView);
-        this.repoBarang = new ServiceBarang(KoneksiDB.getDataSource());
-        this.pesan = new PesananPembelianDetail();
-        this.pesananPembelian = null;
-        this.pesan.setPesananPembelian(pesananPembelian);
-        refreshDataTable();
-    }
-
-    DataPemesananPembelianDetailView(java.awt.Frame parent, boolean modal, PesananPembelian pesanBarang, DataPemesananPembelianView pemesananPembelianController) {
-        super(parent, modal);
-        initComponents();
+        this.pesananController = pemesananPembelianController;
         this.tableController = new TableViewController(tableView);
         this.repoBarang = new ServiceBarang(KoneksiDB.getDataSource());
         this.pesan = new PesananPembelianDetail();
@@ -341,28 +327,13 @@ public class DataPemesananPembelianDetailView extends javax.swing.JDialog {
             this.pesan.setBarang(brg);
             this.pesan.setJumlah(Integer.valueOf(txtJumlah.getValue().toString()));
 
+            this.pesananController.tambahBarangBelanjaan(pesan);
+            this.pesananController.refreshDataTable();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Barang belum dipilih", getTitle(), JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnTambahActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(() -> {
-            DataPemesananPembelianDetailView dialog = new DataPemesananPembelianDetailView(new javax.swing.JFrame(), true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent e) {
-                    System.exit(0);
-                }
-            });
-            dialog.setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKembali;
