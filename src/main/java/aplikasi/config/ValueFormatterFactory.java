@@ -31,8 +31,13 @@ public class ValueFormatterFactory {
         return format.format(number);
     }
 
-    public static String getDateTime(LocalDate date) {
+    public static String getLocalDateLong(LocalDate date) {
         DateTimeFormatter dateFormater = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.getDefault());
+        return dateFormater.format(date);
+    }
+
+    public static String getLocalDateShort(LocalDate date) {
+        DateTimeFormatter dateFormater = DateTimeFormatter.ofPattern("yyMMdd", Locale.getDefault());
         return dateFormater.format(date);
     }
 

@@ -19,6 +19,7 @@ import aplikasi.view.MainMenuView;
 import java.beans.PropertyVetoException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -53,6 +54,18 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
         initComponents();
         refreshDataPemasok();
         this.tableController = new TableViewController(tableView);
+        try {
+            StringBuilder sb = new StringBuilder("PO").append("-");
+
+            sb.append(ValueFormatterFactory.getLocalDateShort(LocalDate.now())).append("-");
+
+            List<PesananPembelian> daftarPO = repoPesananaPembelian.findAll();
+            sb.append(String.format("%02d", daftarPO.size() + 1));
+            txtKode.setText(sb.toString());
+            this.pesanBarang.setKode(sb.toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPemesananPembelianView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void refreshDataTable() {
@@ -336,8 +349,20 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        this.pesanBarang.setTgl(Date.valueOf(ValueFormatterFactory.getDateSQL(txtTanggal.getDate())));
-        this.pesanBarang.setPemasok(daftarPemasok.get(txtKodePemasok.getSelectedIndex()));
+        try {
+            this.pesanBarang.setTgl(Date.valueOf(ValueFormatterFactory.getDateSQL(txtTanggal.getDate())));
+            this.pesanBarang.setPemasok(daftarPemasok.get(txtKodePemasok.getSelectedIndex()));
+
+            repoPesananaPembelian.save(pesanBarang, daftarBelajaan);
+            JOptionPane.showMessageDialog(this, "Daftar belanjaan " + pesanBarang.getKode() + " berhasil disimpan!", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+
+            DataPemesananPembelianView view = new DataPemesananPembelianView(menuController);
+            menuController.setInnerLayout(view);
+        } catch (SQLException ex) {
+            Logger.getLogger(DataPemesananPembelianView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(DataPemesananPembelianView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void txtKodePemasokItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtKodePemasokItemStateChanged
@@ -351,7 +376,7 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
 
     private void btnHapusBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusBarangActionPerformed
         if (tableController.isSelected()) {
-            PesananPembelianDetail pd = daftarBelajaan.get(tableController.getRowSelected());            
+            PesananPembelianDetail pd = daftarBelajaan.get(tableController.getRowSelected());
             boolean remove = daftarBelajaan.remove(pd);
             refreshDataTable();
         } else {
