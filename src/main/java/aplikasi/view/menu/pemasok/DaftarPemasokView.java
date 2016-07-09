@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aplikasi.view.pemasok;
+package aplikasi.view.menu.pemasok;
 
 import aplikasi.config.KoneksiDB;
 import aplikasi.controller.TableViewController;
@@ -23,7 +23,7 @@ import javax.swing.RowFilter;
  *
  * @author dimmaryanto
  */
-public class DaftarPemasok extends javax.swing.JInternalFrame {
+public class DaftarPemasokView extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
     private final TableViewController tableController;
@@ -31,7 +31,7 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
     private final JFrame frame;
     private List<Pemasok> daftarPemasok = new ArrayList<>();
 
-    public DaftarPemasok(JFrame frame) {
+    public DaftarPemasokView(JFrame frame) {
         initComponents();
         this.frame = frame;
         this.tableController = new TableViewController(tableView);
@@ -62,7 +62,7 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Tidak dapat mendapatkan data pemasok", getTitle(), JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(DaftarPemasok.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaftarPemasokView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +90,7 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
         txtCari = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
-        setTitle("Daftar Pemasok");
+        setTitle("Daftar Data Pemasok");
 
         jToolBar1.setRollover(true);
 
@@ -271,7 +271,7 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        DataPemasok view = new DataPemasok(frame, true, this);
+        DataPemasokView view = new DataPemasokView(frame, true, this);
         view.setResizable(false);
         view.setLocationRelativeTo(null);
         view.setVisible(true);
@@ -293,7 +293,7 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         if (tableController.isSelected()) {
             Pemasok pemasok = daftarPemasok.get(tableController.getRowSelected());
-            DataPemasok view = new DataPemasok(frame, true, pemasok, this);
+            DataPemasokView view = new DataPemasokView(frame, true, pemasok, this);
             view.setLocationRelativeTo(null);
             view.setResizable(false);
             view.setVisible(true);
@@ -310,7 +310,7 @@ public class DaftarPemasok extends javax.swing.JInternalFrame {
                 refreshData();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Tidak dapat menghapus data pemasok", getTitle(), JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(DaftarPemasok.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DaftarPemasokView.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Data pemasok belum dipilih", getTitle(), JOptionPane.WARNING_MESSAGE);

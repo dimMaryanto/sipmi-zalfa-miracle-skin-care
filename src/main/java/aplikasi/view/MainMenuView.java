@@ -5,10 +5,11 @@
  */
 package aplikasi.view;
 
-import aplikasi.view.menu.pelanggan.DaftarPelanggan;
-import aplikasi.view.menu.pelanggan.DataPelanggan;
-import aplikasi.view.pemasok.DaftarPemasok;
-import aplikasi.view.pemasok.DataPemasok;
+import aplikasi.view.menu.barang.DaftarBarangView;
+import aplikasi.view.menu.pelanggan.DaftarPelangganView;
+import aplikasi.view.menu.pelanggan.DataPelangganView;
+import aplikasi.view.menu.pemasok.DaftarPemasokView;
+import aplikasi.view.menu.pemasok.DataPemasokView;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,12 +19,12 @@ import javax.swing.JInternalFrame;
  *
  * @author dimmaryanto
  */
-public class MainMenu extends javax.swing.JFrame {
+public class MainMenuView extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
 
     private void showLoginScreen() {
-        Login login = new Login(this, this, true);
+        LoginView login = new LoginView(this, this, true);
         login.setTitle("SIPMI - Zalfa Miracle Skin Care");
         login.setLocationRelativeTo(null);
         login.setVisible(true);
@@ -36,7 +37,7 @@ public class MainMenu extends javax.swing.JFrame {
         internal.setVisible(true);
     }
 
-    public MainMenu() {
+    public MainMenuView() {
         initComponents();
         showLoginScreen();
     }
@@ -263,6 +264,11 @@ public class MainMenu extends javax.swing.JFrame {
         mnuMasterData.add(mniKategoriBarang);
 
         mniBarang.setText("Barang");
+        mniBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniBarangActionPerformed(evt);
+            }
+        });
         mnuMasterData.add(mniBarang);
 
         jMenuBar1.add(mnuMasterData);
@@ -306,7 +312,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPemasokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPemasokActionPerformed
-        DataPemasok view = new DataPemasok(this, true);
+        DataPemasokView view = new DataPemasokView(this, true);
         view.setResizable(false);
         view.setLocationRelativeTo(null);
         view.setVisible(true);
@@ -317,7 +323,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_mniExitActionPerformed
 
     private void btnPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPelangganActionPerformed
-        DataPelanggan pelanggan = new DataPelanggan(this, true);
+        DataPelangganView pelanggan = new DataPelangganView(this, true);
         pelanggan.setLocationRelativeTo(null);
         pelanggan.setResizable(false);
         pelanggan.setVisible(true);
@@ -325,21 +331,31 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void mniPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPelangganActionPerformed
         try {
-            DaftarPelanggan view = new DaftarPelanggan(this);
+            DaftarPelangganView view = new DaftarPelangganView(this);
             setInnerLayout(view);
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mniPelangganActionPerformed
 
     private void mniPemasokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPemasokActionPerformed
         try {
-            DaftarPemasok view = new DaftarPemasok(this);
+            DaftarPemasokView view = new DaftarPemasokView(this);
             setInnerLayout(view);
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mniPemasokActionPerformed
+
+    private void mniBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniBarangActionPerformed
+        try {
+            DaftarBarangView view = new DaftarBarangView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_mniBarangActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPelanggan;

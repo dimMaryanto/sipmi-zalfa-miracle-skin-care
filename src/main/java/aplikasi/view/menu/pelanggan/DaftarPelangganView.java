@@ -23,7 +23,7 @@ import javax.swing.RowFilter;
  *
  * @author dimmaryanto
  */
-public class DaftarPelanggan extends javax.swing.JInternalFrame {
+public class DaftarPelangganView extends javax.swing.JInternalFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,7 +37,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
      *
      * @param frame
      */
-    public DaftarPelanggan(JFrame frame) {
+    public DaftarPelangganView(JFrame frame) {
         initComponents();
         this.tableController = new TableViewController(tableView);
         this.daftarPelanggan = new ArrayList<>();
@@ -76,7 +76,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Tidak dapat menampilkan data pelanggan", "Daftar Pelanggan", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(DaftarPelanggan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaftarPelangganView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -326,7 +326,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCariCaretUpdate
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        DataPelanggan view = new DataPelanggan(frame, this, true);
+        DataPelangganView view = new DataPelangganView(frame, this, true);
         view.setLocationRelativeTo(null);
         view.setResizable(false);
         view.setVisible(true);
@@ -335,7 +335,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         if (tableController.isSelected()) {
             Pelanggan pelanggan = daftarPelanggan.get(tableController.getRowSelected());
-            DataPelanggan view = new DataPelanggan(frame, true, pelanggan, this);
+            DataPelangganView view = new DataPelangganView(frame, true, pelanggan, this);
             view.setLocationRelativeTo(null);
             view.setResizable(false);
             view.setVisible(true);
@@ -354,7 +354,7 @@ public class DaftarPelanggan extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Data pelanggan berhasil dihapus", getTitle(), JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Data pelanggan tidak dapat dihapus", getTitle(), JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(DaftarPelanggan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DaftarPelangganView.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnHapusActionPerformed

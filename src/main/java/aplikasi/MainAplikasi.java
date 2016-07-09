@@ -1,6 +1,6 @@
 package aplikasi;
 
-import aplikasi.view.MainMenu;
+import aplikasi.view.MainMenuView;
 import javax.swing.SwingUtilities;
 
 /**
@@ -11,7 +11,7 @@ public class MainAplikasi {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            MainMenu mainMenu = new MainMenu();
+            MainMenuView mainMenu = new MainMenuView();
             mainMenu.setTitle("SIPMI - Zalfa Miracle Skin Care");
             mainMenu.setLocationRelativeTo(null);
             mainMenu.setVisible(true);
