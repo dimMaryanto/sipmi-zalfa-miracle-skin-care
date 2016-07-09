@@ -6,6 +6,7 @@
 package aplikasi.view;
 
 import aplikasi.view.menu.barang.DaftarBarangView;
+import aplikasi.view.menu.barang.DataBarangView;
 import aplikasi.view.menu.kategori.barang.DaftarKategoriBarangView;
 import aplikasi.view.menu.kategori.barang.DataKategoriBarangView;
 import aplikasi.view.menu.pelanggan.DaftarPelangganView;
@@ -149,6 +150,11 @@ public class MainMenuView extends javax.swing.JFrame {
         btnBarang.setMinimumSize(new java.awt.Dimension(200, 35));
         btnBarang.setPreferredSize(new java.awt.Dimension(200, 35));
         btnBarang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBarangActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnBarang);
         jToolBar1.add(jSeparator2);
 
@@ -384,6 +390,13 @@ public class MainMenuView extends javax.swing.JFrame {
         view.setLocationRelativeTo(null);
         view.setVisible(true);
     }//GEN-LAST:event_btnKategoriBarangActionPerformed
+
+    private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangActionPerformed
+        DataBarangView view = new DataBarangView(this, true);
+        view.setResizable(false);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+    }//GEN-LAST:event_btnBarangActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;

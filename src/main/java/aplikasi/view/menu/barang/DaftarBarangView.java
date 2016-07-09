@@ -33,8 +33,8 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
     private List<Barang> daftarBarang = new ArrayList<>();
 
     public DaftarBarangView(MainMenuView menuController) {
-        this.menuController = menuController;
         initComponents();
+        this.menuController = menuController;
         this.tableController = new TableViewController(tableView);
         this.repoBarang = new ServiceBarang(KoneksiDB.getDataSource());
         refreshDataTables();
@@ -136,6 +136,11 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
         btnTambah.setMinimumSize(new java.awt.Dimension(120, 35));
         btnTambah.setPreferredSize(new java.awt.Dimension(120, 35));
         btnTambah.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnTambah);
 
         btnUbah.setText("Ubah");
@@ -145,6 +150,11 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
         btnUbah.setMinimumSize(new java.awt.Dimension(120, 35));
         btnUbah.setPreferredSize(new java.awt.Dimension(120, 35));
         btnUbah.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnUbah);
 
         btnHapus.setText("Hapus");
@@ -154,6 +164,11 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
         btnHapus.setMinimumSize(new java.awt.Dimension(120, 35));
         btnHapus.setPreferredSize(new java.awt.Dimension(120, 35));
         btnHapus.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnHapus);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_END);
@@ -348,6 +363,38 @@ public class DaftarBarangView extends javax.swing.JInternalFrame {
             clearFields();
         }
     }//GEN-LAST:event_tableViewMouseClicked
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        DataBarangView view = new DataBarangView(menuController, this, true);
+        view.setResizable(false);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+    }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
+        if (tableController.isSelected()) {
+            Barang brg = daftarBarang.get(tableController.getRowSelected());
+            DataBarangView view = new DataBarangView(menuController, this, brg, true);
+            view.setLocationRelativeTo(null);
+            view.setResizable(false);
+            view.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Data barang belum dipilih!", getTitle(), JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnUbahActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        if (tableController.isSelected()) {
+            try {
+                Barang brg = daftarBarang.get(tableController.getRowSelected());
+                repoBarang.delete(brg.getKode());
+                refreshDataTables();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Tidak dapat menghapus data barang", getTitle(), JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(DaftarBarangView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

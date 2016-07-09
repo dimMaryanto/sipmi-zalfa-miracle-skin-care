@@ -143,7 +143,7 @@ public class ServiceBarang implements RepoBarang {
 
     @Override
     public void delete(String id) throws SQLException {
-        String sql = "DELETE FROM barang WHERE kode_barang = ?";
+        String sql = "DELETE FROM barang WHERE kode = ?";
 
         Connection connect = ds.getConnection();
         PreparedStatement ps = connect.prepareStatement(sql);

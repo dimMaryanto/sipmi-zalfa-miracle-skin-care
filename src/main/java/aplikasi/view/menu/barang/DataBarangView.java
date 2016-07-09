@@ -12,8 +12,12 @@ import aplikasi.repository.RepoBarang;
 import aplikasi.repository.RepoKategoriBarang;
 import aplikasi.service.ServiceBarang;
 import aplikasi.service.ServiceKategoriBarang;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,18 +26,11 @@ import java.util.List;
 public class DataBarangView extends javax.swing.JDialog {
 
     private Boolean update;
-    private final RepoBarang repoBarang;
-    private final RepoKategoriBarang repoKategori;
+    private final RepoBarang repoBarang = new ServiceBarang(KoneksiDB.getDataSource());
+    private final RepoKategoriBarang repoKategori = new ServiceKategoriBarang(KoneksiDB.getDataSource());
     private List<KategoriBarang> daftarKategori = new ArrayList<>();
     private Barang barang;
-
-    public Boolean isUpdate() {
-        return update;
-    }
-
-    public void setUpdate(Boolean update) {
-        this.update = update;
-    }
+    private DaftarBarangView daftarBarangController = null;
 
     /**
      * Creates new form DataBarang
@@ -45,10 +42,61 @@ public class DataBarangView extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setUpdate(false);
-        this.repoBarang = new ServiceBarang(KoneksiDB.getDataSource());
-        this.repoKategori = new ServiceKategoriBarang(KoneksiDB.getDataSource());
         this.barang = new Barang();
+        refreshDataKategoriBarang();
+    }
 
+    DataBarangView(java.awt.Frame parent, DaftarBarangView daftarBarangController, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setUpdate(false);
+        this.daftarBarangController = daftarBarangController;
+        this.barang = new Barang();
+        refreshDataKategoriBarang();
+    }
+
+    DataBarangView(java.awt.Frame parent, DaftarBarangView daftarBarangController, Barang brg, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setUpdate(true);
+        refreshDataKategoriBarang();
+        this.daftarBarangController = daftarBarangController;
+        this.barang = brg;
+        setFields(brg);
+    }
+
+    private void setFields(Barang brg) {
+        txtKode.setText(brg.getKode());
+        txtNama.setText(brg.getNama());
+        txtKodeKategori.setSelectedItem(brg.getKategori().getKode());
+        txtHargaBeli.setValue(brg.getHargaBeli());
+        txtHargaJual.setValue(brg.getHargaJual());
+        txtJumlah.setValue(brg.getJumlah());
+        if (brg.getPaket()) {
+            rbPaket.setSelected(true);
+        } else {
+            rbSatuan.setSelected(true);
+        }
+    }
+
+    public Boolean isUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Boolean update) {
+        this.update = update;
+    }
+
+    private void refreshDataKategoriBarang() {
+        try {
+            txtKodeKategori.removeAllItems();
+            daftarKategori = repoKategori.findAll();
+            for (KategoriBarang kb : daftarKategori) {
+                txtKodeKategori.addItem(kb.getKode());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBarangView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -68,8 +116,6 @@ public class DataBarangView extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jToolBar2 = new javax.swing.JToolBar();
-        btnTambahKategori = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -124,7 +170,7 @@ public class DataBarangView extends javax.swing.JDialog {
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_END);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Data Barang"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Barang"));
         jPanel1.setToolTipText("Data Barang");
 
         jLabel1.setText("Kode");
@@ -134,21 +180,16 @@ public class DataBarangView extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Kategori Barang"));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jToolBar2.setRollover(true);
-
-        btnTambahKategori.setText("Tambah");
-        btnTambahKategori.setFocusable(false);
-        btnTambahKategori.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTambahKategori.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(btnTambahKategori);
-
-        jPanel2.add(jToolBar2, java.awt.BorderLayout.PAGE_END);
-
         jLabel5.setText("Kode");
 
         jLabel6.setText("Nama");
 
         txtKodeKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtKodeKategori.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                txtKodeKategoriItemStateChanged(evt);
+            }
+        });
 
         txtNamKategori.setEditable(false);
 
@@ -305,34 +346,47 @@ public class DataBarangView extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        barang.setNama(txtNama.getText());
+        barang.setKategori(daftarKategori.get(txtKodeKategori.getSelectedIndex()));
+        barang.setHargaBeli(Double.valueOf(txtHargaBeli.getValue().toString()));
+        barang.setHargaJual(Double.valueOf(txtHargaJual.getValue().toString()));
+        barang.setPaket(rbPaket.isSelected());
         if (isUpdate()) {
-
+            try {
+                repoBarang.update(barang);
+                this.dispose();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Tidak dapat merubah data barang", getTitle(), JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(DataBarangView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
+            try {
+                barang.setJumlah(0);
+                repoBarang.save(barang);
+                this.dispose();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Tidak dapat menyimpan data barang baru", getTitle(), JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(DataBarangView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
+        if (daftarBarangController != null) {
+            daftarBarangController.refreshDataTables();
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(() -> {
-            DataBarangView dialog = new DataBarangView(new javax.swing.JFrame(), true);
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent e) {
-                    System.exit(0);
-                }
-            });
-            dialog.setVisible(true);
-        });
-    }
+    private void txtKodeKategoriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtKodeKategoriItemStateChanged
+        if (txtKodeKategori.getSelectedIndex() >= 0) {
+            KategoriBarang kb = daftarKategori.get(txtKodeKategori.getSelectedIndex());
+            txtNamKategori.setText(kb.getNama());
+        } else {
+            txtNamKategori.setText("");
+        }
+    }//GEN-LAST:event_txtKodeKategoriItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKembali;
     private javax.swing.JButton btnSimpan;
-    private javax.swing.JButton btnTambahKategori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -346,7 +400,6 @@ public class DataBarangView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JToolBar jToolBar2;
     private javax.swing.ButtonGroup jenisBarangGroup;
     private javax.swing.JRadioButton rbPaket;
     private javax.swing.JRadioButton rbSatuan;

@@ -6,6 +6,7 @@
 package aplikasi.controller;
 
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -22,6 +23,7 @@ public class TableViewController {
 
     public TableViewController(JTable table) {
         this.table = table;
+        this.table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.model = (DefaultTableModel) table.getModel();
         this.sorter = new TableRowSorter<>(model);
         this.table.setRowSorter(sorter);
