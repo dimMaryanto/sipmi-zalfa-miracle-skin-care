@@ -6,6 +6,8 @@
 package aplikasi.view;
 
 import aplikasi.view.menu.barang.DaftarBarangView;
+import aplikasi.view.menu.kategori.barang.DaftarKategoriBarangView;
+import aplikasi.view.menu.kategori.barang.DataKategoriBarangView;
 import aplikasi.view.menu.pelanggan.DaftarPelangganView;
 import aplikasi.view.menu.pelanggan.DataPelangganView;
 import aplikasi.view.menu.pemasok.DaftarPemasokView;
@@ -51,14 +53,14 @@ public class MainMenuView extends javax.swing.JFrame {
         btnPelanggan = new javax.swing.JButton();
         btnPemasok = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btnKategoriBarang = new javax.swing.JButton();
+        btnBarang = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnPenjualan = new javax.swing.JButton();
+        btnPembelian = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        jButton8 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnPesananPembelian = new javax.swing.JButton();
+        btnBayarPesananPembelian = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         desktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -126,61 +128,66 @@ public class MainMenuView extends javax.swing.JFrame {
         jToolBar1.add(btnPemasok);
         jToolBar1.add(jSeparator1);
 
-        jButton3.setText("Kategori Barang");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setMaximumSize(new java.awt.Dimension(200, 35));
-        jButton3.setMinimumSize(new java.awt.Dimension(200, 35));
-        jButton3.setPreferredSize(new java.awt.Dimension(200, 35));
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        btnKategoriBarang.setText("Kategori Barang");
+        btnKategoriBarang.setFocusable(false);
+        btnKategoriBarang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnKategoriBarang.setMaximumSize(new java.awt.Dimension(200, 35));
+        btnKategoriBarang.setMinimumSize(new java.awt.Dimension(200, 35));
+        btnKategoriBarang.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnKategoriBarang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnKategoriBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKategoriBarangActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnKategoriBarang);
 
-        jButton9.setText("Barang");
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.setMaximumSize(new java.awt.Dimension(200, 35));
-        jButton9.setMinimumSize(new java.awt.Dimension(200, 35));
-        jButton9.setPreferredSize(new java.awt.Dimension(200, 35));
-        jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton9);
+        btnBarang.setText("Barang");
+        btnBarang.setFocusable(false);
+        btnBarang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBarang.setMaximumSize(new java.awt.Dimension(200, 35));
+        btnBarang.setMinimumSize(new java.awt.Dimension(200, 35));
+        btnBarang.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnBarang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnBarang);
         jToolBar1.add(jSeparator2);
 
-        jButton4.setText("Penjualan");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setMaximumSize(new java.awt.Dimension(200, 35));
-        jButton4.setMinimumSize(new java.awt.Dimension(200, 35));
-        jButton4.setPreferredSize(new java.awt.Dimension(200, 35));
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
+        btnPenjualan.setText("Penjualan");
+        btnPenjualan.setFocusable(false);
+        btnPenjualan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPenjualan.setMaximumSize(new java.awt.Dimension(200, 35));
+        btnPenjualan.setMinimumSize(new java.awt.Dimension(200, 35));
+        btnPenjualan.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnPenjualan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnPenjualan);
 
-        jButton5.setText("Pembelian");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setMaximumSize(new java.awt.Dimension(200, 35));
-        jButton5.setMinimumSize(new java.awt.Dimension(200, 35));
-        jButton5.setPreferredSize(new java.awt.Dimension(200, 35));
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton5);
+        btnPembelian.setText("Pembelian");
+        btnPembelian.setFocusable(false);
+        btnPembelian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPembelian.setMaximumSize(new java.awt.Dimension(200, 35));
+        btnPembelian.setMinimumSize(new java.awt.Dimension(200, 35));
+        btnPembelian.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnPembelian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnPembelian);
         jToolBar1.add(jSeparator3);
 
-        jButton8.setText("Pesanan Pembelian");
-        jButton8.setFocusable(false);
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.setMaximumSize(new java.awt.Dimension(200, 35));
-        jButton8.setMinimumSize(new java.awt.Dimension(200, 35));
-        jButton8.setPreferredSize(new java.awt.Dimension(200, 35));
-        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton8);
+        btnPesananPembelian.setText("Pesanan Pembelian");
+        btnPesananPembelian.setFocusable(false);
+        btnPesananPembelian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPesananPembelian.setMaximumSize(new java.awt.Dimension(200, 35));
+        btnPesananPembelian.setMinimumSize(new java.awt.Dimension(200, 35));
+        btnPesananPembelian.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnPesananPembelian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnPesananPembelian);
 
-        jButton7.setText("Ambil Pesanan Pembelian");
-        jButton7.setFocusable(false);
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setMaximumSize(new java.awt.Dimension(200, 35));
-        jButton7.setMinimumSize(new java.awt.Dimension(200, 35));
-        jButton7.setPreferredSize(new java.awt.Dimension(200, 35));
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton7);
+        btnBayarPesananPembelian.setText("Ambil Pesanan Pembelian");
+        btnBayarPesananPembelian.setFocusable(false);
+        btnBayarPesananPembelian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBayarPesananPembelian.setMaximumSize(new java.awt.Dimension(200, 35));
+        btnBayarPesananPembelian.setMinimumSize(new java.awt.Dimension(200, 35));
+        btnBayarPesananPembelian.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnBayarPesananPembelian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btnBayarPesananPembelian);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -261,6 +268,11 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuMasterData.add(jSeparator5);
 
         mniKategoriBarang.setText("Kategori Barang");
+        mniKategoriBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniKategoriBarangActionPerformed(evt);
+            }
+        });
         mnuMasterData.add(mniKategoriBarang);
 
         mniBarang.setText("Barang");
@@ -354,19 +366,35 @@ public class MainMenuView extends javax.swing.JFrame {
         } catch (PropertyVetoException ex) {
             Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_mniBarangActionPerformed
 
+    private void mniKategoriBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniKategoriBarangActionPerformed
+        try {
+            DaftarKategoriBarangView view = new DaftarKategoriBarangView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mniKategoriBarangActionPerformed
+
+    private void btnKategoriBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKategoriBarangActionPerformed
+        DataKategoriBarangView view = new DataKategoriBarangView(this, true);
+        view.setResizable(false);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+    }//GEN-LAST:event_btnKategoriBarangActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBarang;
+    private javax.swing.JButton btnBayarPesananPembelian;
+    private javax.swing.JButton btnKategoriBarang;
     private javax.swing.JButton btnPelanggan;
     private javax.swing.JButton btnPemasok;
+    private javax.swing.JButton btnPembelian;
+    private javax.swing.JButton btnPenjualan;
+    private javax.swing.JButton btnPesananPembelian;
     private javax.swing.JDesktopPane desktop;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
