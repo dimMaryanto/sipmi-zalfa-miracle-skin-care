@@ -13,6 +13,7 @@ import aplikasi.view.menu.pelanggan.DaftarPelangganView;
 import aplikasi.view.menu.pelanggan.DataPelangganView;
 import aplikasi.view.menu.pemasok.DaftarPemasokView;
 import aplikasi.view.menu.pemasok.DataPemasokView;
+import aplikasi.view.menu.pembelian.DataPembelianView;
 import aplikasi.view.menu.pemesanan.pembelian.DataPembelianDariPemesananView;
 import aplikasi.view.menu.pemesanan.pembelian.DataPemesananPembelianView;
 import java.beans.PropertyVetoException;
@@ -176,6 +177,11 @@ public class MainMenuView extends javax.swing.JFrame {
         btnPembelian.setMinimumSize(new java.awt.Dimension(200, 35));
         btnPembelian.setPreferredSize(new java.awt.Dimension(200, 35));
         btnPembelian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPembelianActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnPembelian);
         jToolBar1.add(jSeparator3);
 
@@ -441,6 +447,15 @@ public class MainMenuView extends javax.swing.JFrame {
             Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBayarPesananPembelianActionPerformed
+
+    private void btnPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPembelianActionPerformed
+        try {
+            DataPembelianView view = new DataPembelianView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnPembelianActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;
