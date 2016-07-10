@@ -41,8 +41,13 @@ public class ServicePembelian implements RepoPembelian {
         ps.setDate(2, b.getTgl());
         ps.setInt(3, b.getPemasok().getId());
         ps.executeUpdate();
+        ResultSet rs = ps.getGeneratedKeys();
+        if (rs.next()) {
+            b.setId(rs.getInt(1));
+        }
 
         ps.close();
+        rs.close();
         connect.close();
         return b;
     }
@@ -162,14 +167,14 @@ public class ServicePembelian implements RepoPembelian {
 
     @Override
     public Pembelian save(Pembelian b, List<PembelianDetail> listPembelian) throws SQLException {
-        save(b);
+        Pembelian beli = save(b);
 
         String sql = "INSERT INTO pembelian_detail (id_pembelian, kode_barang, harga, jumlah) VALUES (?,?,?,?)";
         Connection connect = ds.getConnection();
 
         PreparedStatement ps = connect.prepareStatement(sql);
         for (PembelianDetail pd : listPembelian) {
-            ps.setInt(1, pd.getPembelian().getId());
+            ps.setInt(1, beli.getId());
             ps.setString(2, pd.getBarang().getKode());
             ps.setDouble(3, pd.getHarga());
             ps.setInt(4, pd.getJumlah());

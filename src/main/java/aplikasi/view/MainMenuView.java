@@ -13,6 +13,7 @@ import aplikasi.view.menu.pelanggan.DaftarPelangganView;
 import aplikasi.view.menu.pelanggan.DataPelangganView;
 import aplikasi.view.menu.pemasok.DaftarPemasokView;
 import aplikasi.view.menu.pemasok.DataPemasokView;
+import aplikasi.view.menu.pemesanan.pembelian.DataPembelianDariPemesananView;
 import aplikasi.view.menu.pemesanan.pembelian.DataPemesananPembelianView;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -199,6 +200,11 @@ public class MainMenuView extends javax.swing.JFrame {
         btnBayarPesananPembelian.setMinimumSize(new java.awt.Dimension(200, 35));
         btnBayarPesananPembelian.setPreferredSize(new java.awt.Dimension(200, 35));
         btnBayarPesananPembelian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBayarPesananPembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBayarPesananPembelianActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnBayarPesananPembelian);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -426,6 +432,15 @@ public class MainMenuView extends javax.swing.JFrame {
             Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnPesananPembelianActionPerformed
+
+    private void btnBayarPesananPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBayarPesananPembelianActionPerformed
+        try {
+            DataPembelianDariPemesananView view = new DataPembelianDariPemesananView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBayarPesananPembelianActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;
