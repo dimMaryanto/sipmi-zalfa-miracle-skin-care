@@ -341,7 +341,7 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
 
     private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
         try {
-            DaftarPemesananPembelianView view = new DaftarPemesananPembelianView(menuController);
+            DataPemesananPembelianView view = new DataPemesananPembelianView(menuController);
             menuController.setInnerLayout(view);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(DataPemesananPembelianView.class.getName()).log(Level.SEVERE, null, ex);

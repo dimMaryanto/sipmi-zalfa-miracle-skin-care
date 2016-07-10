@@ -13,8 +13,6 @@ import aplikasi.view.menu.pelanggan.DaftarPelangganView;
 import aplikasi.view.menu.pelanggan.DataPelangganView;
 import aplikasi.view.menu.pemasok.DaftarPemasokView;
 import aplikasi.view.menu.pemasok.DataPemasokView;
-import aplikasi.view.menu.pemesanan.pembelian.DaftarPemesananPembelianView;
-import aplikasi.view.menu.pemesanan.pembelian.DataPemesananPembelianDetailView;
 import aplikasi.view.menu.pemesanan.pembelian.DataPemesananPembelianView;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -413,7 +411,7 @@ public class MainMenuView extends javax.swing.JFrame {
 
     private void mniPesanPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPesanPembelianActionPerformed
         try {
-            DaftarPemesananPembelianView view = new DaftarPemesananPembelianView(this);
+            DataPemesananPembelianView view = new DataPemesananPembelianView(this);
             setInnerLayout(view);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);

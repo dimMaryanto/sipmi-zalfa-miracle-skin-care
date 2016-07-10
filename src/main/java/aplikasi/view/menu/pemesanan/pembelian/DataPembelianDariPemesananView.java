@@ -5,18 +5,16 @@
  */
 package aplikasi.view.menu.pemesanan.pembelian;
 
-import aplikasi.view.MainMenuView;
-
 /**
  *
  * @author dimmaryanto
  */
-public class DaftarPemesananPembelianView extends javax.swing.JInternalFrame {
+public class DataPembelianDariPemesananView extends javax.swing.JInternalFrame {
 
-    private final MainMenuView menuController;
-
-    public DaftarPemesananPembelianView(MainMenuView menuController) {
-        this.menuController = menuController;
+    /**
+     * Creates new form DataPembelianDariPemesananView
+     */
+    public DataPembelianDariPemesananView() {
         initComponents();
     }
 
@@ -29,18 +27,7 @@ public class DaftarPemesananPembelianView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setTitle("Daftar Data Pemesanan Pembelian");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
-        );
+        setTitle("Pembelian");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
