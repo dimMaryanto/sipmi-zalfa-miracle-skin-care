@@ -21,10 +21,17 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -109,6 +116,8 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
+        btnCetak = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         btnSimpan = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -132,6 +141,21 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
         setTitle("Data Daftar Belanjaan");
 
         jToolBar1.setRollover(true);
+
+        btnCetak.setText("Cetak");
+        btnCetak.setFocusable(false);
+        btnCetak.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCetak.setMaximumSize(new java.awt.Dimension(120, 35));
+        btnCetak.setMinimumSize(new java.awt.Dimension(120, 35));
+        btnCetak.setPreferredSize(new java.awt.Dimension(120, 35));
+        btnCetak.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnCetak);
+        jToolBar1.add(jSeparator1);
 
         btnSimpan.setText("Simpan");
         btnSimpan.setFocusable(false);
@@ -385,8 +409,38 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnHapusBarangActionPerformed
 
+    private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
+        if (daftarBelajaan.size() > 0) {
+            try {
+                String url = "/laporan/DaftarBelanjaan.jasper";
+                Map<String, Object> parametters = new HashMap<>();
+                parametters.put("kode", this.pesanBarang.getKode());
+                parametters.put("tanggal", txtTanggal.getDate());
+
+                if (txtKodePemasok.getSelectedItem() != null) {
+                    Pemasok p = daftarPemasok.get(txtKodePemasok.getSelectedIndex());
+                    parametters.put("kodePemasok", p.getTlp());
+                    parametters.put("namaPemasok", p.getNama());
+
+                }
+                JasperPrint print = JasperFillManager.fillReport(
+                        getClass().getResourceAsStream(url),
+                        parametters,
+                        new JRBeanCollectionDataSource(daftarBelajaan));
+                JasperViewer view = new JasperViewer(print);
+                view.setLocationRelativeTo(null);
+                view.setVisible(true);
+            } catch (JRException ex) {
+                Logger.getLogger(DataPemesananPembelianView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Tidak ada data yang akan dicetak", getTitle(), JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCetakActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCetak;
     private javax.swing.JButton btnHapusBarang;
     private javax.swing.JButton btnKembali;
     private javax.swing.JButton btnSimpan;
@@ -400,6 +454,7 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable tableView;
     private javax.swing.JTextField txtKode;
