@@ -90,8 +90,6 @@ public class MainMenuView extends javax.swing.JFrame {
         mniAmbilPesanPembelian = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mniLapPenjualan = new javax.swing.JMenuItem();
-        mniLapPembelian = new javax.swing.JMenuItem();
-        mniLapBarang = new javax.swing.JMenuItem();
         mniLaporanSirkulasiBarang = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -364,12 +362,6 @@ public class MainMenuView extends javax.swing.JFrame {
         });
         jMenu4.add(mniLapPenjualan);
 
-        mniLapPembelian.setText("Pembelian");
-        jMenu4.add(mniLapPembelian);
-
-        mniLapBarang.setText("Barang");
-        jMenu4.add(mniLapBarang);
-
         mniLaporanSirkulasiBarang.setText("Sirkulasi Barang");
         mniLaporanSirkulasiBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -569,8 +561,6 @@ public class MainMenuView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniBarang;
     private javax.swing.JMenuItem mniExit;
     private javax.swing.JMenuItem mniKategoriBarang;
-    private javax.swing.JMenuItem mniLapBarang;
-    private javax.swing.JMenuItem mniLapPembelian;
     private javax.swing.JMenuItem mniLapPenjualan;
     private javax.swing.JMenuItem mniLaporanSirkulasiBarang;
     private javax.swing.JMenuItem mniLogin;

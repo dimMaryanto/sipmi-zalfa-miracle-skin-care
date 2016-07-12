@@ -135,16 +135,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniLapPenjualanActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mniLapPembelian">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Pembelian"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mniLapBarang">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Barang"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniLaporanSirkulasiBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sirkulasi Barang"/>
