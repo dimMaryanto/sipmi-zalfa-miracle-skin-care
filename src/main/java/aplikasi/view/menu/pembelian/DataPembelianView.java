@@ -50,6 +50,7 @@ public class DataPembelianView extends javax.swing.JInternalFrame {
 
         initComponents();
         this.tableController = new TableViewController(tableView);
+        this.txtTanggal.setDate(new java.util.Date());
         refreshPemasok();
     }
 

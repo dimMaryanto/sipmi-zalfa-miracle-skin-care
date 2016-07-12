@@ -40,7 +40,7 @@ public class DataPenjualanView extends javax.swing.JInternalFrame {
     private final TableViewController tableController;
 
     private List<Pelanggan> daftarPelanggan = new ArrayList<>();
-    private List<PenjualanDetail> daftarPenjualan = new ArrayList<>();
+    private List<PenjualanDetail> daftarPenjualanBarang = new ArrayList<>();
 
     /**
      * Creates new form DataPenjualanView
@@ -56,6 +56,7 @@ public class DataPenjualanView extends javax.swing.JInternalFrame {
         initComponents();
 
         this.tableController = new TableViewController(tableView);
+        this.txtTanggal.setDate(new java.util.Date());
         refreshPelanggan();
         try {
             List<Penjualan> daftarPenjualan = repoPenjualan.findAll();
@@ -86,7 +87,7 @@ public class DataPenjualanView extends javax.swing.JInternalFrame {
     private void refreshDataTable() {
         tableController.clearData();
         Double total = 0D;
-        for (PenjualanDetail pd : daftarPenjualan) {
+        for (PenjualanDetail pd : daftarPenjualanBarang) {
             Double subTotal = (pd.getHarga() * pd.getJumlah()) - pd.getDiskon();
             Barang brg = pd.getBarang();
             Object[] row = {
@@ -105,12 +106,12 @@ public class DataPenjualanView extends javax.swing.JInternalFrame {
     }
 
     public void tambahBarang(PenjualanDetail pd) {
-        daftarPenjualan.add(pd);
+        daftarPenjualanBarang.add(pd);
         refreshDataTable();
     }
 
     public void hapusBarang(PenjualanDetail pd) {
-        daftarPenjualan.remove(pd);
+        daftarPenjualanBarang.remove(pd);
         refreshDataTable();
     }
 
@@ -420,7 +421,7 @@ public class DataPenjualanView extends javax.swing.JInternalFrame {
 
     private void btnHapusBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusBarangActionPerformed
         if (tableController.isSelected()) {
-            PenjualanDetail pd = daftarPenjualan.get(tableController.getRowSelected());
+            PenjualanDetail pd = daftarPenjualanBarang.get(tableController.getRowSelected());
             hapusBarang(pd);
         } else {
             JOptionPane.showMessageDialog(this, "Data belanjaan belum dipilih", getTitle(), JOptionPane.WARNING_MESSAGE);
@@ -440,7 +441,7 @@ public class DataPenjualanView extends javax.swing.JInternalFrame {
         try {
             this.penjualan.setPelanggan(daftarPelanggan.get(txtKodePelanggan.getSelectedIndex()));
             this.penjualan.setTgl(Date.valueOf(ValueFormatterFactory.getDateSQL(txtTanggal.getDate())));
-            repoPenjualan.save(penjualan, daftarPenjualan);
+            repoPenjualan.save(penjualan, daftarPenjualanBarang);
 
             JOptionPane.showMessageDialog(this, "Data penjualan berhasil disimpan", getTitle(), JOptionPane.INFORMATION_MESSAGE);
 

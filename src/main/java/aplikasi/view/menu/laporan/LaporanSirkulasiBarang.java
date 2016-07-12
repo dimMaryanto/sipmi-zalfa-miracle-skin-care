@@ -21,6 +21,7 @@ import aplikasi.service.ServicePenjualan;
 import aplikasi.view.MainMenuView;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +48,8 @@ public class LaporanSirkulasiBarang extends javax.swing.JInternalFrame {
         this.repoPenjualan = new ServicePenjualan(KoneksiDB.getDataSource());
         initComponents();
 
+        txtTanggalAkhir.setDate(new Date());
+        txtTanggalAwal.setDate(new Date());
         this.tableController = new TableViewController(tableView);
 
         try {

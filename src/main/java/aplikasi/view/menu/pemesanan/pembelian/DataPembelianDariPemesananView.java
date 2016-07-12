@@ -50,6 +50,7 @@ public class DataPembelianDariPemesananView extends javax.swing.JInternalFrame {
         this.repoPesanan = new ServicePesananPembelian(KoneksiDB.getDataSource());
         this.pembelian = new Pembelian();
         this.tableController = new TableViewController(tableView);
+        this.txtTanggal.setDate(new java.util.Date());
         refreshPemasok();
     }
 

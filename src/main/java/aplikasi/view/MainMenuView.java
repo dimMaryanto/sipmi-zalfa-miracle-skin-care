@@ -319,9 +319,19 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuTransaksi.setText("Transaksi");
 
         mniPembelian.setText("Pembelian");
+        mniPembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPembelianActionPerformed(evt);
+            }
+        });
         mnuTransaksi.add(mniPembelian);
 
         mniPenjualan.setText("Penjualan");
+        mniPenjualan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPenjualanActionPerformed(evt);
+            }
+        });
         mnuTransaksi.add(mniPenjualan);
         mnuTransaksi.add(jSeparator6);
 
@@ -334,6 +344,11 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuTransaksi.add(mniPesanPembelian);
 
         mniAmbilPesanPembelian.setText("Bayar Pesanan");
+        mniAmbilPesanPembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniAmbilPesanPembelianActionPerformed(evt);
+            }
+        });
         mnuTransaksi.add(mniAmbilPesanPembelian);
 
         jMenuBar1.add(mnuTransaksi);
@@ -486,6 +501,33 @@ public class MainMenuView extends javax.swing.JFrame {
             Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mniLaporanSirkulasiBarangActionPerformed
+
+    private void mniPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPembelianActionPerformed
+        try {
+            DataPembelianView view = new DataPembelianView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mniPembelianActionPerformed
+
+    private void mniPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPenjualanActionPerformed
+        try {
+            DataPenjualanView view = new DataPenjualanView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mniPenjualanActionPerformed
+
+    private void mniAmbilPesanPembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAmbilPesanPembelianActionPerformed
+        try {
+            DataPembelianDariPemesananView view = new DataPembelianDariPemesananView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mniAmbilPesanPembelianActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;

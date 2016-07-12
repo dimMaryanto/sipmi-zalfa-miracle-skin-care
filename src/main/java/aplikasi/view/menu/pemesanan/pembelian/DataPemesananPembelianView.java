@@ -53,6 +53,7 @@ public class DataPemesananPembelianView extends javax.swing.JInternalFrame {
         this.repoPesananaPembelian = new ServicePesananPembelian(KoneksiDB.getDataSource());
         initComponents();
         refreshDataPemasok();
+        this.txtTanggal.setDate(new java.util.Date());
         this.tableController = new TableViewController(tableView);
         try {
             StringBuilder sb = new StringBuilder("PO").append("-");
