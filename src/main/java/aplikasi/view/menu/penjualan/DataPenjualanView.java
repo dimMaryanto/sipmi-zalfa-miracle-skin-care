@@ -504,7 +504,7 @@ public class DataPenjualanView extends javax.swing.JInternalFrame {
                     getClass().getResourceAsStream(url),
                     map,
                     new JRBeanCollectionDataSource(daftarPenjualanBarang));
-            JasperViewer view = new JasperViewer(print);
+            JasperViewer view = new JasperViewer(print, false);
             view.setLocationRelativeTo(null);
             view.setVisible(true);
         } catch (JRException ex) {

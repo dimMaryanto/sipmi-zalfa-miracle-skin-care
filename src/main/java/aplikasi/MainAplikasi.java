@@ -1,6 +1,7 @@
 package aplikasi;
 
 import aplikasi.view.MainMenuView;
+import java.util.Locale;
 import javax.swing.SwingUtilities;
 
 /**
@@ -10,6 +11,7 @@ import javax.swing.SwingUtilities;
 public class MainAplikasi {
 
     public static void main(String[] args) {
+        Locale.setDefault(new Locale("in", "ID"));
         SwingUtilities.invokeLater(() -> {
             MainMenuView mainMenu = new MainMenuView();
             mainMenu.setTitle("SIPMI - Zalfa Miracle Skin Care");
