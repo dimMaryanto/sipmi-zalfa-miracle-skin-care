@@ -22,10 +22,21 @@ import aplikasi.view.MainMenuView;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -144,6 +155,11 @@ public class LaporanSirkulasiBarang extends javax.swing.JInternalFrame {
         });
 
         btnCetak.setText("Cetak");
+        btnCetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetakActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -248,6 +264,28 @@ public class LaporanSirkulasiBarang extends javax.swing.JInternalFrame {
             Logger.getLogger(LaporanSirkulasiBarang.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnProsesActionPerformed
+
+    private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
+        if (daftarSirkulasiBarang.size() > 0) {
+            try {
+                String url = "/laporan/SirkulasiBarang.jasper";
+                Map<String, Object> map = new HashMap<>();
+                map.put("tglAwal", txtTanggalAwal.getDate());
+                map.put("tglAkhir", txtTanggalAkhir.getDate());
+                JasperPrint print = JasperFillManager.fillReport(
+                        getClass().getResourceAsStream(url),
+                        map,
+                        new JRBeanCollectionDataSource(daftarSirkulasiBarang));
+                JasperViewer view = new JasperViewer(print);
+                view.setLocationRelativeTo(null);
+                view.setVisible(true);
+            } catch (JRException ex) {
+                Logger.getLogger(LaporanSirkulasiBarang.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Data belum diproses", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCetakActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
