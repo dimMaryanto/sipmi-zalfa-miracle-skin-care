@@ -9,7 +9,8 @@ import aplikasi.view.menu.barang.DaftarBarangView;
 import aplikasi.view.menu.barang.DataBarangView;
 import aplikasi.view.menu.kategori.barang.DaftarKategoriBarangView;
 import aplikasi.view.menu.kategori.barang.DataKategoriBarangView;
-import aplikasi.view.menu.laporan.LaporanSirkulasiBarang;
+import aplikasi.view.menu.laporan.LaporanPenjualanView;
+import aplikasi.view.menu.laporan.LaporanSirkulasiBarangView;
 import aplikasi.view.menu.pelanggan.DaftarPelangganView;
 import aplikasi.view.menu.pelanggan.DataPelangganView;
 import aplikasi.view.menu.pemasok.DaftarPemasokView;
@@ -356,6 +357,11 @@ public class MainMenuView extends javax.swing.JFrame {
         jMenu4.setText("Laporan");
 
         mniLapPenjualan.setText("Penjualan");
+        mniLapPenjualan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniLapPenjualanActionPerformed(evt);
+            }
+        });
         jMenu4.add(mniLapPenjualan);
 
         mniLapPembelian.setText("Pembelian");
@@ -495,7 +501,7 @@ public class MainMenuView extends javax.swing.JFrame {
 
     private void mniLaporanSirkulasiBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLaporanSirkulasiBarangActionPerformed
         try {
-            LaporanSirkulasiBarang view = new LaporanSirkulasiBarang(this);
+            LaporanSirkulasiBarangView view = new LaporanSirkulasiBarangView(this);
             setInnerLayout(view);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
@@ -528,6 +534,15 @@ public class MainMenuView extends javax.swing.JFrame {
             Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mniAmbilPesanPembelianActionPerformed
+
+    private void mniLapPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLapPenjualanActionPerformed
+        try {
+            LaporanPenjualanView view = new LaporanPenjualanView(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mniLapPenjualanActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;

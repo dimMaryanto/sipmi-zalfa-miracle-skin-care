@@ -42,7 +42,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author dimmaryanto
  */
-public class LaporanSirkulasiBarang extends javax.swing.JInternalFrame {
+public class LaporanSirkulasiBarangView extends javax.swing.JInternalFrame {
 
     private final RepoBarang repoBarang;
     private final RepoPenjualan repoPenjualan;
@@ -52,7 +52,7 @@ public class LaporanSirkulasiBarang extends javax.swing.JInternalFrame {
     private final List<SirkulasiBarang> daftarSirkulasiBarang = new ArrayList<>();
     private List<Barang> daftarBarang = new ArrayList<>();
 
-    public LaporanSirkulasiBarang(MainMenuView menuController) {
+    public LaporanSirkulasiBarangView(MainMenuView menuController) {
         this.menuController = menuController;
         this.repoBarang = new ServiceBarang(KoneksiDB.getDataSource());
         this.repoPembelian = new ServicePembelian(KoneksiDB.getDataSource());
@@ -67,7 +67,7 @@ public class LaporanSirkulasiBarang extends javax.swing.JInternalFrame {
             daftarBarang = repoBarang.findAll();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Tidak dapat mendapatkan data barang", getTitle(), JOptionPane.WARNING_MESSAGE);
-            Logger.getLogger(LaporanSirkulasiBarang.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LaporanSirkulasiBarangView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -261,7 +261,7 @@ public class LaporanSirkulasiBarang extends javax.swing.JInternalFrame {
             prosesMerge(daftarPenjualan, daftarPembelian);
             refreshDataTable();
         } catch (SQLException ex) {
-            Logger.getLogger(LaporanSirkulasiBarang.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LaporanSirkulasiBarangView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnProsesActionPerformed
 
@@ -280,7 +280,7 @@ public class LaporanSirkulasiBarang extends javax.swing.JInternalFrame {
                 view.setLocationRelativeTo(null);
                 view.setVisible(true);
             } catch (JRException ex) {
-                Logger.getLogger(LaporanSirkulasiBarang.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LaporanSirkulasiBarangView.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Data belum diproses", getTitle(), JOptionPane.INFORMATION_MESSAGE);
