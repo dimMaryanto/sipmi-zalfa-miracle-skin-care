@@ -170,6 +170,18 @@ public class ServicePenjualan implements RepoPenjualan {
 
         ps.executeBatch();
         ps.close();
+
+        sql = "UPDATE barang SET jumlah = ? WHERE kode = ?";
+        ps = connect.prepareStatement(sql);
+        for (PenjualanDetail pd : barangJual) {
+            Barang brg = pd.getBarang();
+            Integer stokSekarang = brg.getJumlah() - pd.getJumlah();
+            ps.setInt(1, stokSekarang);
+            ps.setString(2, brg.getKode());
+            ps.addBatch();
+        }
+        ps.executeBatch();
+        ps.close();
         connect.close();
         return p;
     }
