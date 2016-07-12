@@ -88,6 +88,8 @@ public class DaftarPelangganView extends javax.swing.JInternalFrame {
         btnTambah = new javax.swing.JButton();
         btnUbah = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableView = new javax.swing.JTable();
@@ -151,6 +153,18 @@ public class DaftarPelangganView extends javax.swing.JInternalFrame {
             }
         });
         btnMenu.add(btnHapus);
+        btnMenu.add(jSeparator1);
+
+        jButton1.setText("Daftar Agen");
+        jButton1.setMaximumSize(new java.awt.Dimension(120, 35));
+        jButton1.setMinimumSize(new java.awt.Dimension(120, 35));
+        jButton1.setPreferredSize(new java.awt.Dimension(120, 35));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        btnMenu.add(jButton1);
 
         getContentPane().add(btnMenu, java.awt.BorderLayout.PAGE_END);
 
@@ -301,7 +315,7 @@ public class DaftarPelangganView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(90, 90, 90))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.LINE_END);
@@ -359,12 +373,29 @@ public class DaftarPelangganView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (tableController.isSelected()) {
+            Pelanggan p = daftarPelanggan.get(tableController.getRowSelected());
+            if (p.getAgen()) {
+                JOptionPane.showMessageDialog(this, "Data pelanggan tersebut telah menjadi Agen", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                DaftarAgen daftar = new DaftarAgen(frame, true, this, p);
+                daftar.setLocationRelativeTo(null);
+                daftar.setResizable(false);
+                daftar.setVisible(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Data Pelanggan Belum dipilih", getTitle(), JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHapus;
     private javax.swing.JToolBar btnMenu;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnUbah;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -375,6 +406,7 @@ public class DaftarPelangganView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JTable tableView;
     private javax.swing.JTextArea txtAlamat;
     private javax.swing.JTextField txtCari;

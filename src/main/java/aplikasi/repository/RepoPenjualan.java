@@ -20,7 +20,9 @@ public interface RepoPenjualan extends BaseRepository<Penjualan, String> {
     public Penjualan save(Penjualan p, List<PenjualanDetail> barangJual) throws SQLException;
 
     public List<PenjualanDetail> findPenjualanDetailByPenjualanKode(String kode) throws SQLException;
-    
-    public List<PenjualanDetail> findPenjualanDetailBetweenTanggal(Date tglAwal, Date tglAkhir)throws SQLException;
+
+    public List<PenjualanDetail> findPenjualanDetailBetweenTanggal(Date tglAwal, Date tglAkhir) throws SQLException;
+
+    public Penjualan findByPelangganOrderByTanggalAscLastTransaction(String kode) throws SQLException;
 
 }

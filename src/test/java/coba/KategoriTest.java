@@ -12,12 +12,14 @@ import aplikasi.service.ServiceKategoriBarang;
 import java.sql.SQLException;
 import java.util.List;
 import junit.framework.TestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  *
  * @author dimmaryanto
  */
+@Ignore
 public class KategoriTest extends TestCase {
 
     private RepoKategoriBarang repo;

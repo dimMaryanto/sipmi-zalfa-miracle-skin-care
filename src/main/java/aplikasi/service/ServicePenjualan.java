@@ -341,4 +341,42 @@ public class ServicePenjualan implements RepoPenjualan {
         return list;
     }
 
+    @Override
+    public Penjualan findByPelangganOrderByTanggalAscLastTransaction(String kode) throws SQLException {
+        String sql = "SELECT \n"
+                + "    j.kode as kode_penjualan,\n"
+                + "    j.tgl as tanggal_penjualan,\n"
+                + "    p.kode as kode_pelanggan,\n"
+                + "    p.nama as nama_pelanggan,\n"
+                + "    p.alamat as alamat_pelanggan,\n"
+                + "    p.notlp as tlp_pelanggan,\n"
+                + "    p.agen as pelanggan_agen\n"
+                + "FROM penjualan j JOIN pelanggan p ON (j.kode_pelanggan = p.kode)\n"
+                + "WHERE p.kode = ?\n"
+                + "ORDER BY j.tgl ASC";
+        Connection connect = ds.getConnection();
+        PreparedStatement ps = connect.prepareStatement(sql);
+        ps.setString(1, kode);
+        ResultSet rs = ps.executeQuery();
+        Penjualan j = null;
+        if (rs.next()) {
+            j = new Penjualan();
+            j.setKode(rs.getString("kode_penjualan"));
+            j.setTgl(rs.getDate("tanggal_penjualan"));
+
+            Pelanggan p = new Pelanggan();
+            p.setKode(rs.getString("kode_pelanggan"));
+            p.setNama(rs.getString("nama_pelanggan"));
+            p.setAlamat(rs.getString("alamat_pelanggan"));
+            p.setTlp(rs.getString("tlp_pelanggan"));
+            p.setAgen(rs.getBoolean("pelanggan_agen"));
+            j.setPelanggan(p);
+        }
+
+        ps.close();
+        rs.close();
+        connect.close();
+        return j;
+    }
+
 }
