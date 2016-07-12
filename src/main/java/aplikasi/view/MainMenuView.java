@@ -9,6 +9,7 @@ import aplikasi.view.menu.barang.DaftarBarangView;
 import aplikasi.view.menu.barang.DataBarangView;
 import aplikasi.view.menu.kategori.barang.DaftarKategoriBarangView;
 import aplikasi.view.menu.kategori.barang.DataKategoriBarangView;
+import aplikasi.view.menu.laporan.LaporanSirkulasiBarang;
 import aplikasi.view.menu.pelanggan.DaftarPelangganView;
 import aplikasi.view.menu.pelanggan.DataPelangganView;
 import aplikasi.view.menu.pemasok.DaftarPemasokView;
@@ -349,6 +350,11 @@ public class MainMenuView extends javax.swing.JFrame {
         jMenu4.add(mniLapBarang);
 
         mniLaporanSirkulasiBarang.setText("Sirkulasi Barang");
+        mniLaporanSirkulasiBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniLaporanSirkulasiBarangActionPerformed(evt);
+            }
+        });
         jMenu4.add(mniLaporanSirkulasiBarang);
 
         jMenuBar1.add(jMenu4);
@@ -471,6 +477,15 @@ public class MainMenuView extends javax.swing.JFrame {
             Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnPenjualanActionPerformed
+
+    private void mniLaporanSirkulasiBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLaporanSirkulasiBarangActionPerformed
+        try {
+            LaporanSirkulasiBarang view = new LaporanSirkulasiBarang(this);
+            setInnerLayout(view);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mniLaporanSirkulasiBarangActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;

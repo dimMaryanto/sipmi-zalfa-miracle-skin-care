@@ -7,6 +7,7 @@ package aplikasi.repository;
 
 import aplikasi.entity.Penjualan;
 import aplikasi.entity.PenjualanDetail;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,5 +20,7 @@ public interface RepoPenjualan extends BaseRepository<Penjualan, String> {
     public Penjualan save(Penjualan p, List<PenjualanDetail> barangJual) throws SQLException;
 
     public List<PenjualanDetail> findPenjualanDetailByPenjualanKode(String kode) throws SQLException;
+    
+    public List<PenjualanDetail> findPenjualanDetailBetweenTanggal(Date tglAwal, Date tglAkhir)throws SQLException;
 
 }
