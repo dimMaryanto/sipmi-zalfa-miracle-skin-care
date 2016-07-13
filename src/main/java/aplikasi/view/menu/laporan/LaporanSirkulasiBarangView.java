@@ -28,13 +28,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
-import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
@@ -51,6 +47,37 @@ public class LaporanSirkulasiBarangView extends javax.swing.JInternalFrame {
     private final TableViewController tableController;
     private final List<SirkulasiBarang> daftarSirkulasiBarang = new ArrayList<>();
     private List<Barang> daftarBarang = new ArrayList<>();
+
+    private class JumlahBarang {
+
+        private Barang barang;
+        private Integer jumlah;
+
+        public JumlahBarang() {
+        }
+
+        public JumlahBarang(Barang barang, Integer jumlah) {
+            this.barang = barang;
+            this.jumlah = jumlah;
+        }
+
+        public Barang getBarang() {
+            return barang;
+        }
+
+        public void setBarang(Barang barang) {
+            this.barang = barang;
+        }
+
+        public Integer getJumlah() {
+            return jumlah;
+        }
+
+        public void setJumlah(Integer jumlah) {
+            this.jumlah = jumlah;
+        }
+
+    }
 
     public LaporanSirkulasiBarangView(MainMenuView menuController) {
         this.menuController = menuController;
@@ -87,7 +114,38 @@ public class LaporanSirkulasiBarangView extends javax.swing.JInternalFrame {
         }
     }
 
-    private void prosesMerge(List<PenjualanDetail> daftarJualBarang, List<PembelianDetail> daftarBeliBarang) {
+    private List<JumlahBarang> getBarangMasuk(List<PembelianDetail> daftarBeli) {
+        List<JumlahBarang> list = new ArrayList<>();
+        for (Barang barang : daftarBarang) {
+            Integer jumlah = 0;
+            for (PembelianDetail beli : daftarBeli) {
+                Barang b = beli.getBarang();
+                if (barang.getKode().equalsIgnoreCase(b.getKode())) {
+                    jumlah += beli.getJumlah();
+                }
+            }
+            list.add(new JumlahBarang(barang, jumlah));
+        }
+        return list;
+    }
+
+    private List<JumlahBarang> getBarangKeluar(List<PenjualanDetail> daftarJual) {
+        List<JumlahBarang> list = new ArrayList<>();
+        for (Barang barang : daftarBarang) {
+            Integer jumlah = 0;
+            for (PenjualanDetail jual : daftarJual) {
+                Barang b = jual.getBarang();
+                if (barang.getKode().equalsIgnoreCase(b.getKode())) {
+                    jumlah += jual.getJumlah();
+                }
+            }
+            list.add(new JumlahBarang(barang, jumlah));
+        }
+        return list;
+    }
+
+    @Deprecated
+    private void prosesMergeBarang(List<PenjualanDetail> daftarJualBarang, List<PembelianDetail> daftarBeliBarang) {
         this.daftarSirkulasiBarang.clear();
         for (Barang brg : daftarBarang) {
             Integer jumlahJual = 0;
@@ -95,15 +153,17 @@ public class LaporanSirkulasiBarangView extends javax.swing.JInternalFrame {
             for (PenjualanDetail jual : daftarJualBarang) {
                 Barang b = jual.getBarang();
                 if (brg.getKode().equalsIgnoreCase(b.getKode())) {
-                    jumlahJual += 1;
+                    jumlahJual += jual.getJumlah();
                 }
+                System.out.println("Barang " + b.getNama() + " ke " + jumlahJual);
             }
 
             for (PembelianDetail beli : daftarBeliBarang) {
                 Barang b = beli.getBarang();
                 if (brg.getKode().equalsIgnoreCase(b.getKode())) {
-                    jumlahBeli += 1;
+                    jumlahBeli += beli.getJumlah();
                 }
+                System.out.println("Barang " + b.getNama() + " ke " + jumlahBeli);
             }
 
             SirkulasiBarang sirkulasiBarang = new SirkulasiBarang();
@@ -119,6 +179,38 @@ public class LaporanSirkulasiBarangView extends javax.swing.JInternalFrame {
             System.out.println("Pembelian Kode barang :" + brg.getKode() + " jumlah " + jumlahBeli);
             System.out.println("------------------------------------------------------------------");
         }
+    }
+
+    public Integer jumlah(Barang barang, List<JumlahBarang> daftar) {
+        Integer hasil = 0;
+        for (JumlahBarang data : daftar) {
+            if (data.getBarang().getKode().equalsIgnoreCase(barang.getKode())) {
+                hasil += data.getJumlah();
+            }
+        }
+        return hasil;
+    }
+
+    private void mergeList(
+            List<JumlahBarang> beliSebelum,
+            List<JumlahBarang> beli,
+            List<JumlahBarang> jualSebelum,
+            List<JumlahBarang> jual) {
+
+        daftarSirkulasiBarang.clear();
+        for (Barang barang : daftarBarang) {
+            SirkulasiBarang sirkulasi = new SirkulasiBarang();
+            sirkulasi.setBarang(barang);
+            Integer jmlSebelumMasuk = jumlah(barang, beliSebelum);
+            Integer jmlSebelumKeluar = jumlah(barang, jualSebelum);
+            
+            sirkulasi.setStokBarangKeluar(jumlah(barang, jual));
+            sirkulasi.setStokBarangMasuk(jumlah(barang, beli));
+            sirkulasi.setStokBarangSekarang(barang.getJumlah());
+            sirkulasi.setStokBarangAwal(jmlSebelumMasuk - jmlSebelumKeluar);
+            daftarSirkulasiBarang.add(sirkulasi);
+        }
+        refreshDataTable();
     }
 
     /**
@@ -256,10 +348,16 @@ public class LaporanSirkulasiBarangView extends javax.swing.JInternalFrame {
         try {
             java.sql.Date tglAwal = java.sql.Date.valueOf(ValueFormatterFactory.getDateSQL(txtTanggalAwal.getDate()));
             java.sql.Date tglAkhir = java.sql.Date.valueOf(ValueFormatterFactory.getDateSQL(txtTanggalAkhir.getDate()));
-            List<PenjualanDetail> daftarPenjualan = repoPenjualan.findPenjualanDetailBetweenTanggal(tglAwal, tglAkhir);
-            List<PembelianDetail> daftarPembelian = repoPembelian.findPembelianDetailBetweenTanggal(tglAwal, tglAkhir);
-            prosesMerge(daftarPenjualan, daftarPembelian);
-            refreshDataTable();
+            List<PenjualanDetail> daftarJual = repoPenjualan.findPenjualanDetailBetweenTanggal(tglAwal, tglAkhir);
+            List<PembelianDetail> daftarBeli = repoPembelian.findPembelianDetailBetweenTanggal(tglAwal, tglAkhir);
+            List<PenjualanDetail> daftarJualSebelum = repoPenjualan.findPenjualanDetailByTanggalLowerThen(tglAwal);
+            List<PembelianDetail> daftarBeliSebelum = repoPembelian.findPembelianDetailByTanggalLowerThen(tglAwal);
+
+            mergeList(
+                    getBarangMasuk(daftarBeliSebelum),
+                    getBarangMasuk(daftarBeli),
+                    getBarangKeluar(daftarJualSebelum),
+                    getBarangKeluar(daftarJual));
         } catch (SQLException ex) {
             Logger.getLogger(LaporanSirkulasiBarangView.class.getName()).log(Level.SEVERE, null, ex);
         }

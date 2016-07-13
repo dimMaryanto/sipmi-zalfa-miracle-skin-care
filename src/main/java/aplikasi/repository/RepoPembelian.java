@@ -20,7 +20,9 @@ public interface RepoPembelian extends BaseRepository<Pembelian, Integer> {
     public Pembelian save(Pembelian b, List<PembelianDetail> listPembelian) throws SQLException;
 
     public List<PembelianDetail> findPembelianDetailByPembelianId(Integer idPembelian) throws SQLException;
-    
-    public List<PembelianDetail> findPembelianDetailBetweenTanggal(Date awal, Date akhir)throws SQLException;
+
+    public List<PembelianDetail> findPembelianDetailBetweenTanggal(Date awal, Date akhir) throws SQLException;
+
+    public List<PembelianDetail> findPembelianDetailByTanggalLowerThen(Date tanggal) throws SQLException;
 
 }
