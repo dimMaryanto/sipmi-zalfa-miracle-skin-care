@@ -33,3 +33,4 @@ FROM penjualan j JOIN pelanggan p ON (j.kode_pelanggan = p.kode)
     JOIN penjualan_detail jd ON (j.kode = jd.kode_penjualan)
     JOIN barang brg ON (brg.kode = jd.kode_barang)
     JOIN kategori_brg kbrg ON (kbrg.id = brg.id_kategori)
+WHERE p.kode = 'PEL01';

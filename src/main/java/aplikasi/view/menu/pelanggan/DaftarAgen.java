@@ -38,7 +38,7 @@ public class DaftarAgen extends javax.swing.JDialog {
         this.pelangganController = pelangganController;
         this.repoPelanggan = new ServicePelanggan(KoneksiDB.getDataSource());
         initComponents();
-        
+
         txtKode.setText(pelanggan.getKode());
         txtNama.setText(pelanggan.getNama());
         txtTelp.setText(pelanggan.getTlp());
@@ -47,16 +47,12 @@ public class DaftarAgen extends javax.swing.JDialog {
 
     private Boolean cekTransaksi(Pelanggan pelanggan) {
         Boolean valid = false;
-        Penjualan jual = null;
         try {
-            jual = repoPenjualan.findByPelangganOrderByTanggalAscLastTransaction(pelanggan.getKode());
-            if (jual != null) {
-                List<PenjualanDetail> daftarBarang = repoPenjualan.findPenjualanDetailByPenjualanKode(jual.getKode());
-                for (PenjualanDetail detailPenjualan : daftarBarang) {
-                    Barang brg = detailPenjualan.getBarang();
-                    if (brg.getPaket() && detailPenjualan.getJumlah() >= 4) {
-                        valid = true;
-                    }
+            List<PenjualanDetail> daftarBarang = repoPenjualan.findPenjualanDetailByPelangganKode(pelanggan.getKode());
+            for (PenjualanDetail detailJual : daftarBarang) {
+                Barang brg = detailJual.getBarang();
+                if (brg.getPaket() && detailJual.getJumlah() >= 4) {
+                    valid = true;
                 }
             }
         } catch (SQLException ex) {
@@ -200,9 +196,9 @@ public class DaftarAgen extends javax.swing.JDialog {
             try {
                 pelanggan.setAgen(true);
                 repoPelanggan.update(pelanggan);
-                
+
                 JOptionPane.showMessageDialog(this, "Data pelanggan tersebut telah menjadi agen");
-                
+
                 this.pelangganController.refreshDataTable();
                 this.dispose();
             } catch (SQLException ex) {

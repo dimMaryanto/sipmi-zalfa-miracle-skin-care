@@ -342,6 +342,7 @@ public class ServicePenjualan implements RepoPenjualan {
     }
 
     @Override
+    @Deprecated
     public Penjualan findByPelangganOrderByTanggalAscLastTransaction(String kode) throws SQLException {
         String sql = "SELECT \n"
                 + "    j.kode as kode_penjualan,\n"
@@ -457,7 +458,79 @@ public class ServicePenjualan implements RepoPenjualan {
 
     @Override
     public List<PenjualanDetail> findPenjualanDetailByPelangganKode(String kode) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT \n"
+                + "    j.kode as kode_penjualan,\n"
+                + "    j.tgl as tanggal_penjualan,\n"
+                + "    p.kode as kode_pelanggan,\n"
+                + "    p.nama as nama_pelanggan,\n"
+                + "    p.alamat as alamat_pelanggan,\n"
+                + "    p.notlp as tlp_pelanggan,\n"
+                + "    p.agen as pelanggan_agen,\n"
+                + "    jd.id as kode_penjualan_detail,\n"
+                + "    jd.harga as harga_penjualan,\n"
+                + "    jd.jumlah as jumlah_penjualan,\n"
+                + "    jd.diskon as diskon_penjualan,\n"
+                + "    brg.kode as kode_barang,\n"
+                + "    brg.nama as nama_barang,\n"
+                + "    brg.harga_jual as harga_jual_barang,\n"
+                + "    brg.harga_beli as harga_beli_barang,\n"
+                + "    brg.jumlah as stok_barang,\n"
+                + "    brg.paket as barang_paketan,\n"
+                + "    kbrg.id as id_kategori_barang,\n"
+                + "    kbrg.kode as kode_kategori_barang,\n"
+                + "    kbrg.nama as nama_kategori_barang\n"
+                + "FROM penjualan j JOIN pelanggan p ON (j.kode_pelanggan = p.kode)\n"
+                + "    JOIN penjualan_detail jd ON (j.kode = jd.kode_penjualan)\n"
+                + "    JOIN barang brg ON (brg.kode = jd.kode_barang)\n"
+                + "    JOIN kategori_brg kbrg ON (kbrg.id = brg.id_kategori)\n"
+                + "WHERE p.kode = ?";
+
+        List<PenjualanDetail> list = new ArrayList<>();
+        Connection connect = ds.getConnection();
+        PreparedStatement ps = connect.prepareStatement(sql);
+        ps.setString(1, kode);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Penjualan j = new Penjualan();
+            j.setKode(rs.getString("kode_penjualan"));
+            j.setTgl(rs.getDate("tanggal_penjualan"));
+
+            Pelanggan p = new Pelanggan();
+            p.setKode(rs.getString("kode_pelanggan"));
+            p.setNama(rs.getString("nama_pelanggan"));
+            p.setAlamat(rs.getString("alamat_pelanggan"));
+            p.setTlp(rs.getString("tlp_pelanggan"));
+            p.setAgen(rs.getBoolean("pelanggan_agen"));
+            j.setPelanggan(p);
+
+            Barang brg = new Barang();
+            brg.setKode(rs.getString("kode_barang"));
+            brg.setNama(rs.getString("nama_barang"));
+            brg.setHargaBeli(rs.getDouble("harga_beli_barang"));
+            brg.setHargaJual(rs.getDouble("harga_jual_barang"));
+            brg.setJumlah(rs.getInt("stok_barang"));
+            brg.setPaket(rs.getBoolean("barang_paketan"));
+
+            KategoriBarang kb = new KategoriBarang();
+            kb.setId(rs.getInt("id_kategori_barang"));
+            kb.setKode(rs.getString("kode_kategori_barang"));
+            kb.setNama(rs.getString("nama_kategori_barang"));
+
+            brg.setKategori(kb);
+
+            PenjualanDetail jd = new PenjualanDetail();
+            jd.setId(rs.getInt("kode_penjualan_detail"));
+            jd.setPenjualan(j);
+            jd.setBarang(brg);
+            jd.setHarga(rs.getDouble("harga_penjualan"));
+            jd.setJumlah(rs.getInt("jumlah_penjualan"));
+            jd.setDiskon(rs.getDouble("diskon_penjualan"));
+            list.add(jd);
+        }
+        ps.close();
+        rs.close();
+        connect.close();
+        return list;
     }
 
 }
