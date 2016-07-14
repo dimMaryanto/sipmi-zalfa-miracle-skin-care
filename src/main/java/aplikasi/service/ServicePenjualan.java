@@ -455,4 +455,9 @@ public class ServicePenjualan implements RepoPenjualan {
         return list;
     }
 
+    @Override
+    public List<PenjualanDetail> findPenjualanDetailByPelangganKode(String kode) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
