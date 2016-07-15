@@ -5,6 +5,15 @@
  */
 package aplikasi.view;
 
+import aplikasi.config.KoneksiDB;
+import aplikasi.entity.Pengguna;
+import aplikasi.repository.RepoPengguna;
+import aplikasi.service.ServicePengguna;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dimmaryanto
@@ -14,17 +23,20 @@ public class LoginView extends javax.swing.JDialog {
     private static final long serialVersionUID = 1L;
 
     private final MainMenuView menuUtamaController;
+    private final RepoPengguna repoPengguna;
 
     /**
      * Creates new form Login
+     *
      * @param menuUtama
      * @param parent
      * @param modal
      */
-    public LoginView(MainMenuView menuUtama,java.awt.Frame parent, boolean modal) {
+    public LoginView(MainMenuView menuUtama, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.menuUtamaController = menuUtama;
+        this.repoPengguna = new ServicePengguna(KoneksiDB.getDataSource());
     }
 
     /**
@@ -66,7 +78,7 @@ public class LoginView extends javax.swing.JDialog {
         });
         jToolBar1.add(btnLogin);
 
-        btnExit.setText("Keluar");
+        btnExit.setText("Kembali");
         btnExit.setFocusable(false);
         btnExit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnExit.setMaximumSize(new java.awt.Dimension(100, 35));
@@ -130,11 +142,26 @@ public class LoginView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        this.dispose();
+        try {
+            char[] password = txtPassword.getPassword();
+            Pengguna pengguna = repoPengguna.findByUsernameAndPasswordAndIsStatusEnabled(txtUsername.getText(), String.copyValueOf(password));
+            if (pengguna != null) {
+                this.menuUtamaController.enabledMenu(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Username dan password salah", getTitle(), JOptionPane.WARNING_MESSAGE);
+                txtPassword.setText("");
+                txtUsername.setText("");
+                txtUsername.requestFocus();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Tidak dapat mendapatkan data user", getTitle(), JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

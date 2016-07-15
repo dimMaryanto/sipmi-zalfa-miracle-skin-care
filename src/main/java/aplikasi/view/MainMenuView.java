@@ -44,11 +44,42 @@ public class MainMenuView extends javax.swing.JFrame {
         this.desktop.add(internal);
         internal.setMaximum(true);
         internal.setVisible(true);
+        this.desktop.repaint();
+    }
+
+    public void enabledMenu(Boolean aktif) {
+        this.btnPelanggan.setEnabled(aktif);
+        this.btnPemasok.setEnabled(aktif);
+        this.btnKategoriBarang.setEnabled(aktif);
+        this.btnBarang.setEnabled(aktif);
+        this.btnPenjualan.setEnabled(aktif);
+        this.btnPembelian.setEnabled(aktif);
+        this.btnPesananPembelian.setEnabled(aktif);
+        this.btnBayarPesananPembelian.setEnabled(aktif);
+        
+        this.mniPelanggan.setEnabled(aktif);
+        this.mniPemasok.setEnabled(aktif);
+        this.mniKategoriBarang.setEnabled(aktif);
+        this.mniBarang.setEnabled(aktif);
+        this.mniPembelian.setEnabled(aktif);
+        this.mniPenjualan.setEnabled(aktif);
+        this.mniPesanPembelian.setEnabled(aktif);
+        this.mniAmbilPesanPembelian.setEnabled(aktif);
+        
+        this.mniLapPenjualan.setEnabled(aktif);
+        this.mniLaporanSirkulasiBarang.setEnabled(aktif);
+        if (aktif) {
+            this.mniLogin.setEnabled(false);
+            this.mniLogout.setEnabled(true);
+        } else {
+            this.mniLogin.setEnabled(true);
+            this.mniLogout.setEnabled(false);
+        }
+
     }
 
     public MainMenuView() {
         initComponents();
-        showLoginScreen();
     }
 
     @SuppressWarnings("unchecked")
@@ -270,9 +301,20 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuAplikasi.setText("Aplikasi");
 
         mniLogin.setText("Login");
+        mniLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniLoginActionPerformed(evt);
+            }
+        });
         mnuAplikasi.add(mniLogin);
 
         mniLogout.setText("Logout");
+        mniLogout.setEnabled(false);
+        mniLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniLogoutActionPerformed(evt);
+            }
+        });
         mnuAplikasi.add(mniLogout);
         mnuAplikasi.add(jSeparator4);
 
@@ -553,6 +595,16 @@ public class MainMenuView extends javax.swing.JFrame {
             Logger.getLogger(MainMenuView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mniLapPenjualanActionPerformed
+
+    private void mniLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLoginActionPerformed
+        showLoginScreen();
+    }//GEN-LAST:event_mniLoginActionPerformed
+
+    private void mniLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLogoutActionPerformed
+        this.enabledMenu(false);
+        this.desktop.removeAll();
+        this.desktop.repaint();
+    }//GEN-LAST:event_mniLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBarang;

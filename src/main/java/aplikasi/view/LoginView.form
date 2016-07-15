@@ -66,7 +66,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnExit">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Keluar"/>
+            <Property name="text" type="java.lang.String" value="Kembali"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
