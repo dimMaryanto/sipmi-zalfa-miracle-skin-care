@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS sipmi;
+CREATE DATABASE IF NOT EXISTS sipmi;
+use sipmi;
+
 -- --------------------------------------------------------
 --
 -- Table structure for table kategori_brg
@@ -128,7 +132,7 @@ CREATE TABLE IF NOT EXISTS user (
     nama varchar(50) NOT NULL,
     username varchar(50) NOT NULL,
     password varchar(50) NOT NULL,
-    jabatan varchar(20) NOT NULL,
+    jabatan enum('ADMIN', 'GUDANG','KASIR') NOT NULL,
     status boolean NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 
@@ -137,9 +141,9 @@ CREATE TABLE IF NOT EXISTS user (
 --
 
 INSERT INTO user (id, nama, username, password, jabatan, status) VALUES
-    (1, 'admin', 'admin', 'admin', 'Admin', 1),
-    (2, 'lani ', 'lani', 'gudang', 'gudang', 1),
-    (3, 'wulan', 'wulan', 'kasir', 'kasir', 0);
+    (1, 'admin', 'admin', 'admin', 'ADMIN', 1),
+    (2, 'lani ', 'lani', 'gudang', 'GUDANG', 1),
+    (3, 'wulan', 'wulan', 'kasir', 'KASIR', 0);
 
 -- --------------------------------------------------------
 --

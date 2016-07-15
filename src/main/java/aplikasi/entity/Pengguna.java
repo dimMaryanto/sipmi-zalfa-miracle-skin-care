@@ -10,12 +10,16 @@ package aplikasi.entity;
  * @author dimmaryanto
  */
 public class Pengguna {
-    
+
+    public enum Role {
+        ADMIN, GUDANG, KASIR
+    }
+
     private Integer id;
     private String username;
     private String password;
     private String nama;
-    private String jabatan;
+    private Role jabatan;
     private Boolean status;
 
     public Integer getId() {
@@ -50,11 +54,11 @@ public class Pengguna {
         this.nama = nama;
     }
 
-    public String getJabatan() {
+    public Role getJabatan() {
         return jabatan;
     }
 
-    public void setJabatan(String jabatan) {
+    public void setJabatan(Role jabatan) {
         this.jabatan = jabatan;
     }
 
@@ -65,7 +69,5 @@ public class Pengguna {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-    
-    
-    
+
 }

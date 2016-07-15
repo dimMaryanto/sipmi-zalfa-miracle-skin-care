@@ -46,7 +46,7 @@ public class ServicePengguna implements RepoPengguna {
             p.setUsername(rs.getString("username"));
             p.setPassword(rs.getString("password"));
             p.setNama(rs.getString("nama"));
-            p.setJabatan(rs.getString("jabatan"));
+            p.setJabatan(Pengguna.Role.valueOf(rs.getString("jabatan")));
             p.setStatus(rs.getBoolean("status"));
         }
 
@@ -81,7 +81,7 @@ public class ServicePengguna implements RepoPengguna {
             p.setUsername(rs.getString("username"));
             p.setPassword(rs.getString("password"));
             p.setNama(rs.getString("nama"));
-            p.setJabatan(rs.getString("jabatan"));
+            p.setJabatan(Pengguna.Role.valueOf(rs.getString("jabatan")));
             p.setStatus(rs.getBoolean("status"));
             list.add(p);
         }
@@ -109,7 +109,7 @@ public class ServicePengguna implements RepoPengguna {
             p.setUsername(rs.getString("username"));
             p.setPassword(rs.getString("password"));
             p.setNama(rs.getString("nama"));
-            p.setJabatan(rs.getString("jabatan"));
+            p.setJabatan(Pengguna.Role.valueOf(rs.getString("jabatan")));
             p.setStatus(rs.getBoolean("status"));
         }
 

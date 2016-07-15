@@ -22,7 +22,6 @@ import aplikasi.view.menu.penjualan.DataPenjualanView;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 
 /**
@@ -67,26 +66,36 @@ public class MainMenuView extends javax.swing.JFrame {
         this.btnBarang.setEnabled(aktif);
         this.mniBarang.setEnabled(aktif);
     }
-    
-    public void setEnabledMenuPenjualan(Boolean aktif){
+
+    public void setEnabledMenuPenjualan(Boolean aktif) {
         this.btnPenjualan.setEnabled(aktif);
         this.mniPenjualan.setEnabled(aktif);
     }
-    
-    public void setEnabledMenuPembelian(Boolean aktif){
+
+    public void setEnabledMenuPembelian(Boolean aktif) {
         this.btnPembelian.setEnabled(aktif);
         this.mniPembelian.setEnabled(aktif);
-        
+
         this.btnPesananPembelian.setEnabled(aktif);
         this.mniPesanPembelian.setEnabled(aktif);
-        
+
         this.btnBayarPesananPembelian.setEnabled(aktif);
         this.mniAmbilPesanPembelian.setEnabled(aktif);
     }
-    
-    public void setEnabledMenuLaporan(Boolean aktif){
+
+    public void setEnabledMenuLaporan(Boolean aktif) {
         this.mniLaporanSirkulasiBarang.setEnabled(aktif);
         this.mniLapPenjualan.setEnabled(aktif);
+    }
+
+    public void setLoginEnabled(Boolean login) {
+        if (login) {
+            this.mniLogin.setEnabled(false);
+            this.mniLogout.setEnabled(true);
+        } else {
+            this.mniLogin.setEnabled(true);
+            this.mniLogout.setEnabled(false);
+        }
     }
 
     public void enabledMenu(Boolean aktif) {
@@ -110,14 +119,6 @@ public class MainMenuView extends javax.swing.JFrame {
 
         this.mniLapPenjualan.setEnabled(aktif);
         this.mniLaporanSirkulasiBarang.setEnabled(aktif);
-        if (aktif) {
-            this.mniLogin.setEnabled(false);
-            this.mniLogout.setEnabled(true);
-        } else {
-            this.mniLogin.setEnabled(true);
-            this.mniLogout.setEnabled(false);
-        }
-
     }
 
     public MainMenuView() {
@@ -643,6 +644,7 @@ public class MainMenuView extends javax.swing.JFrame {
     }//GEN-LAST:event_mniLoginActionPerformed
 
     private void mniLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLogoutActionPerformed
+        this.setLoginEnabled(false);
         this.enabledMenu(false);
         this.desktop.removeAll();
         this.desktop.repaint();
