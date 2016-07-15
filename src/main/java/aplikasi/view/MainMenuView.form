@@ -48,6 +48,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniPelanggan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pelanggan"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniPelangganActionPerformed"/>
@@ -56,6 +57,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniPemasok">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pemasok"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniPemasokActionPerformed"/>
@@ -66,6 +68,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniKategoriBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Kategori Barang"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniKategoriBarangActionPerformed"/>
@@ -74,6 +77,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Barang"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniBarangActionPerformed"/>
@@ -89,6 +93,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pembelian"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniPembelianActionPerformed"/>
@@ -97,6 +102,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniPenjualan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Penjualan"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniPenjualanActionPerformed"/>
@@ -107,6 +113,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniPesanPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesanan Pembelian"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniPesanPembelianActionPerformed"/>
@@ -115,6 +122,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniAmbilPesanPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Bayar Pesanan"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniAmbilPesanPembelianActionPerformed"/>
@@ -130,6 +138,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniLapPenjualan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Penjualan"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniLapPenjualanActionPerformed"/>
@@ -138,6 +147,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniLaporanSirkulasiBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sirkulasi Barang"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniLaporanSirkulasiBarangActionPerformed"/>
@@ -228,6 +238,7 @@
             <Component class="javax.swing.JButton" name="btnPelanggan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pelanggan"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -248,6 +259,7 @@
             <Component class="javax.swing.JButton" name="btnPemasok">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pemasok"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -270,6 +282,7 @@
             <Component class="javax.swing.JButton" name="btnKategoriBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Kategori Barang"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -290,6 +303,7 @@
             <Component class="javax.swing.JButton" name="btnBarang">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Barang"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -312,6 +326,7 @@
             <Component class="javax.swing.JButton" name="btnPenjualan">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Penjualan"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -332,6 +347,7 @@
             <Component class="javax.swing.JButton" name="btnPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pembelian"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -354,6 +370,7 @@
             <Component class="javax.swing.JButton" name="btnPesananPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pesanan Pembelian"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -374,6 +391,7 @@
             <Component class="javax.swing.JButton" name="btnBayarPesananPembelian">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ambil Pesanan Pembelian"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

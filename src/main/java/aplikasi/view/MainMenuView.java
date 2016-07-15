@@ -105,6 +105,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jToolBar1.setFocusCycleRoot(true);
 
         btnPelanggan.setText("Pelanggan");
+        btnPelanggan.setEnabled(false);
         btnPelanggan.setFocusable(false);
         btnPelanggan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPelanggan.setMaximumSize(new java.awt.Dimension(200, 35));
@@ -119,6 +120,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jToolBar1.add(btnPelanggan);
 
         btnPemasok.setText("Pemasok");
+        btnPemasok.setEnabled(false);
         btnPemasok.setFocusable(false);
         btnPemasok.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPemasok.setMaximumSize(new java.awt.Dimension(200, 35));
@@ -134,6 +136,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jToolBar1.add(jSeparator1);
 
         btnKategoriBarang.setText("Kategori Barang");
+        btnKategoriBarang.setEnabled(false);
         btnKategoriBarang.setFocusable(false);
         btnKategoriBarang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnKategoriBarang.setMaximumSize(new java.awt.Dimension(200, 35));
@@ -148,6 +151,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jToolBar1.add(btnKategoriBarang);
 
         btnBarang.setText("Barang");
+        btnBarang.setEnabled(false);
         btnBarang.setFocusable(false);
         btnBarang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBarang.setMaximumSize(new java.awt.Dimension(200, 35));
@@ -163,6 +167,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jToolBar1.add(jSeparator2);
 
         btnPenjualan.setText("Penjualan");
+        btnPenjualan.setEnabled(false);
         btnPenjualan.setFocusable(false);
         btnPenjualan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPenjualan.setMaximumSize(new java.awt.Dimension(200, 35));
@@ -177,6 +182,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jToolBar1.add(btnPenjualan);
 
         btnPembelian.setText("Pembelian");
+        btnPembelian.setEnabled(false);
         btnPembelian.setFocusable(false);
         btnPembelian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPembelian.setMaximumSize(new java.awt.Dimension(200, 35));
@@ -192,6 +198,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jToolBar1.add(jSeparator3);
 
         btnPesananPembelian.setText("Pesanan Pembelian");
+        btnPesananPembelian.setEnabled(false);
         btnPesananPembelian.setFocusable(false);
         btnPesananPembelian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPesananPembelian.setMaximumSize(new java.awt.Dimension(200, 35));
@@ -206,6 +213,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jToolBar1.add(btnPesananPembelian);
 
         btnBayarPesananPembelian.setText("Ambil Pesanan Pembelian");
+        btnBayarPesananPembelian.setEnabled(false);
         btnBayarPesananPembelian.setFocusable(false);
         btnBayarPesananPembelian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBayarPesananPembelian.setMaximumSize(new java.awt.Dimension(200, 35));
@@ -281,6 +289,7 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuMasterData.setText("Master Data");
 
         mniPelanggan.setText("Pelanggan");
+        mniPelanggan.setEnabled(false);
         mniPelanggan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniPelangganActionPerformed(evt);
@@ -289,6 +298,7 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuMasterData.add(mniPelanggan);
 
         mniPemasok.setText("Pemasok");
+        mniPemasok.setEnabled(false);
         mniPemasok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniPemasokActionPerformed(evt);
@@ -298,6 +308,7 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuMasterData.add(jSeparator5);
 
         mniKategoriBarang.setText("Kategori Barang");
+        mniKategoriBarang.setEnabled(false);
         mniKategoriBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniKategoriBarangActionPerformed(evt);
@@ -306,6 +317,7 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuMasterData.add(mniKategoriBarang);
 
         mniBarang.setText("Barang");
+        mniBarang.setEnabled(false);
         mniBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniBarangActionPerformed(evt);
@@ -318,6 +330,7 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuTransaksi.setText("Transaksi");
 
         mniPembelian.setText("Pembelian");
+        mniPembelian.setEnabled(false);
         mniPembelian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniPembelianActionPerformed(evt);
@@ -326,6 +339,7 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuTransaksi.add(mniPembelian);
 
         mniPenjualan.setText("Penjualan");
+        mniPenjualan.setEnabled(false);
         mniPenjualan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniPenjualanActionPerformed(evt);
@@ -335,6 +349,7 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuTransaksi.add(jSeparator6);
 
         mniPesanPembelian.setText("Pesanan Pembelian");
+        mniPesanPembelian.setEnabled(false);
         mniPesanPembelian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniPesanPembelianActionPerformed(evt);
@@ -343,6 +358,7 @@ public class MainMenuView extends javax.swing.JFrame {
         mnuTransaksi.add(mniPesanPembelian);
 
         mniAmbilPesanPembelian.setText("Bayar Pesanan");
+        mniAmbilPesanPembelian.setEnabled(false);
         mniAmbilPesanPembelian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniAmbilPesanPembelianActionPerformed(evt);
@@ -355,6 +371,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jMenu4.setText("Laporan");
 
         mniLapPenjualan.setText("Penjualan");
+        mniLapPenjualan.setEnabled(false);
         mniLapPenjualan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniLapPenjualanActionPerformed(evt);
@@ -363,6 +380,7 @@ public class MainMenuView extends javax.swing.JFrame {
         jMenu4.add(mniLapPenjualan);
 
         mniLaporanSirkulasiBarang.setText("Sirkulasi Barang");
+        mniLaporanSirkulasiBarang.setEnabled(false);
         mniLaporanSirkulasiBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniLaporanSirkulasiBarangActionPerformed(evt);
