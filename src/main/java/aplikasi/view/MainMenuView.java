@@ -22,6 +22,7 @@ import aplikasi.view.menu.penjualan.DataPenjualanView;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 
 /**
@@ -47,6 +48,47 @@ public class MainMenuView extends javax.swing.JFrame {
         this.desktop.repaint();
     }
 
+    public void setEnabledMenuPelanggan(Boolean aktif) {
+        this.btnPelanggan.setEnabled(aktif);
+        this.mniPelanggan.setEnabled(aktif);
+    }
+
+    public void setEnabledMenuPemasok(Boolean aktif) {
+        this.btnPemasok.setEnabled(aktif);
+        this.mniPemasok.setEnabled(aktif);
+    }
+
+    public void setEnabledMenuKategoriBarang(Boolean aktif) {
+        this.btnKategoriBarang.setEnabled(aktif);
+        this.mniKategoriBarang.setEnabled(aktif);
+    }
+
+    public void setEnabledMenuBarang(Boolean aktif) {
+        this.btnBarang.setEnabled(aktif);
+        this.mniBarang.setEnabled(aktif);
+    }
+    
+    public void setEnabledMenuPenjualan(Boolean aktif){
+        this.btnPenjualan.setEnabled(aktif);
+        this.mniPenjualan.setEnabled(aktif);
+    }
+    
+    public void setEnabledMenuPembelian(Boolean aktif){
+        this.btnPembelian.setEnabled(aktif);
+        this.mniPembelian.setEnabled(aktif);
+        
+        this.btnPesananPembelian.setEnabled(aktif);
+        this.mniPesanPembelian.setEnabled(aktif);
+        
+        this.btnBayarPesananPembelian.setEnabled(aktif);
+        this.mniAmbilPesanPembelian.setEnabled(aktif);
+    }
+    
+    public void setEnabledMenuLaporan(Boolean aktif){
+        this.mniLaporanSirkulasiBarang.setEnabled(aktif);
+        this.mniLapPenjualan.setEnabled(aktif);
+    }
+
     public void enabledMenu(Boolean aktif) {
         this.btnPelanggan.setEnabled(aktif);
         this.btnPemasok.setEnabled(aktif);
@@ -56,7 +98,7 @@ public class MainMenuView extends javax.swing.JFrame {
         this.btnPembelian.setEnabled(aktif);
         this.btnPesananPembelian.setEnabled(aktif);
         this.btnBayarPesananPembelian.setEnabled(aktif);
-        
+
         this.mniPelanggan.setEnabled(aktif);
         this.mniPemasok.setEnabled(aktif);
         this.mniKategoriBarang.setEnabled(aktif);
@@ -65,7 +107,7 @@ public class MainMenuView extends javax.swing.JFrame {
         this.mniPenjualan.setEnabled(aktif);
         this.mniPesanPembelian.setEnabled(aktif);
         this.mniAmbilPesanPembelian.setEnabled(aktif);
-        
+
         this.mniLapPenjualan.setEnabled(aktif);
         this.mniLaporanSirkulasiBarang.setEnabled(aktif);
         if (aktif) {
