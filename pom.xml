@@ -4,7 +4,7 @@
 
     <groupId>com.hotmail.dimmaryanto.software</groupId>
     <artifactId>sipmi-zalfa-miracle-skin-care</artifactId>
-    <version>1.0-ALPHA</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>sipmi-zalfa-miracle-skin-care</name>
