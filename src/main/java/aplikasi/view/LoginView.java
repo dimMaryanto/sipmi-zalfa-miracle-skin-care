@@ -150,25 +150,25 @@ public class LoginView extends javax.swing.JDialog {
             char[] password = txtPassword.getPassword();
             Pengguna pengguna = repoPengguna.findByUsernameAndPasswordAndIsStatusEnabled(txtUsername.getText(), String.copyValueOf(password));
             this.menuUtamaController.setLoginEnabled(pengguna != null);
-            if (pengguna != null && pengguna.getJabatan() == Pengguna.Role.ADMIN) {
+            if (pengguna != null && pengguna.getJabatan() == Pengguna.Role.ADMIN && pengguna.getStatus()) {
                 this.menuUtamaController.enabledMenu(true);
                 this.dispose();
-            } else if (pengguna != null && pengguna.getJabatan() == Pengguna.Role.GUDANG) {
-                this.menuUtamaController.enabledMenu(true);
+            } else if (pengguna != null && pengguna.getJabatan() == Pengguna.Role.GUDANG && pengguna.getStatus()) {
+                this.menuUtamaController.enabledMenu(false);
                 this.menuUtamaController.setEnabledMenuBarang(true);
                 this.menuUtamaController.setEnabledMenuKategoriBarang(true);
                 this.menuUtamaController.setEnabledMenuPemasok(true);
                 this.menuUtamaController.setEnabledMenuPembelian(true);
                 this.dispose();
-            } else if (pengguna != null && pengguna.getJabatan() == Pengguna.Role.KASIR) {
-                this.menuUtamaController.enabledMenu(true);
+            } else if (pengguna != null && pengguna.getJabatan() == Pengguna.Role.KASIR && pengguna.getStatus()) {
+                this.menuUtamaController.enabledMenu(false);
                 this.menuUtamaController.setEnabledMenuBarang(true);
                 this.menuUtamaController.setEnabledMenuKategoriBarang(true);
                 this.menuUtamaController.setEnabledMenuPenjualan(true);
                 this.menuUtamaController.setEnabledMenuPelanggan(true);
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Username dan password salah", getTitle(), JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Username dan password salah atau tidak aktif", getTitle(), JOptionPane.WARNING_MESSAGE);
                 txtPassword.setText("");
                 txtUsername.setText("");
                 txtUsername.requestFocus();
