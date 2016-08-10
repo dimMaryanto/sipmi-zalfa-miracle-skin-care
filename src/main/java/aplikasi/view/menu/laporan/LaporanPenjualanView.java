@@ -16,6 +16,7 @@ import aplikasi.entity.PenjualanDetail;
 import aplikasi.repository.RepoPenjualan;
 import aplikasi.service.ServicePenjualan;
 import aplikasi.view.MainMenuView;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,14 +44,14 @@ public class LaporanPenjualanView extends javax.swing.JInternalFrame {
         initComponents();
         this.tablePenjualanController = new TableViewController(tablePenjualan);
         this.tableBarangPenjualanController = new TableViewController(tableBarang);
-
-        refreshDataPenjualan();
+        txtTanggalAwal.setDate(new java.util.Date());
+        txtTanggalAkhir.setDate(new java.util.Date());
     }
 
-    private void refreshDataPenjualan() {
+    private void refreshDataPenjualan(Date tglAwal, Date tglAkhir) {
         try {
             tablePenjualanController.clearData();
-            daftarPenjualan = repoPenjualan.findAll();
+            daftarPenjualan = repoPenjualan.findPenjualanByTglBetween(tglAwal, tglAkhir);
             for (Penjualan penjualan : daftarPenjualan) {
                 Object[] row = {
                     penjualan.getKode(),
@@ -125,6 +126,12 @@ public class LaporanPenjualanView extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableBarang = new javax.swing.JTable();
+        jToolBar1 = new javax.swing.JToolBar();
+        jLabel5 = new javax.swing.JLabel();
+        txtTanggalAwal = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        txtTanggalAkhir = new com.toedter.calendar.JDateChooser();
+        btnCari = new javax.swing.JButton();
 
         setTitle("Laporan Penjualan");
 
@@ -179,7 +186,7 @@ public class LaporanPenjualanView extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -283,7 +290,7 @@ public class LaporanPenjualanView extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -324,6 +331,42 @@ public class LaporanPenjualanView extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
+        jToolBar1.setRollover(true);
+
+        jLabel5.setText("Periode:   ");
+        jToolBar1.add(jLabel5);
+
+        txtTanggalAwal.setMaximumSize(new java.awt.Dimension(150, 35));
+        txtTanggalAwal.setMinSelectableDate(null);
+        txtTanggalAwal.setMinimumSize(new java.awt.Dimension(150, 35));
+        txtTanggalAwal.setPreferredSize(new java.awt.Dimension(150, 35));
+        jToolBar1.add(txtTanggalAwal);
+
+        jLabel6.setText("s/d");
+        jToolBar1.add(jLabel6);
+
+        txtTanggalAkhir.setMaximumSize(new java.awt.Dimension(150, 35));
+        txtTanggalAkhir.setMinSelectableDate(null);
+        txtTanggalAkhir.setMinimumSize(new java.awt.Dimension(150, 35));
+        txtTanggalAkhir.setPreferredSize(new java.awt.Dimension(150, 35));
+        jToolBar1.add(txtTanggalAkhir);
+
+        btnCari.setText("Cari");
+        btnCari.setFocusable(false);
+        btnCari.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCari.setMaximumSize(new java.awt.Dimension(100, 35));
+        btnCari.setMinimumSize(new java.awt.Dimension(100, 35));
+        btnCari.setPreferredSize(new java.awt.Dimension(100, 35));
+        btnCari.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnCari);
+
+        getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -336,22 +379,34 @@ public class LaporanPenjualanView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tablePenjualanMouseClicked
 
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        String valueTglAwal = ValueFormatterFactory.getDateSQL(txtTanggalAwal.getDate());
+        String valueTglAkhir = ValueFormatterFactory.getDateSQL(txtTanggalAkhir.getDate());
+        refreshDataPenjualan(Date.valueOf(valueTglAwal), Date.valueOf(valueTglAkhir));
+    }//GEN-LAST:event_btnCariActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCari;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable tableBarang;
     private javax.swing.JTable tablePenjualan;
     private javax.swing.JTextField txtKodePenjualan;
     private javax.swing.JTextField txtNamaPelanggan;
+    private com.toedter.calendar.JDateChooser txtTanggalAkhir;
+    private com.toedter.calendar.JDateChooser txtTanggalAwal;
     private javax.swing.JTextField txtTanggalPenjualan;
     private javax.swing.JTextField txtTelpPelanggan;
     // End of variables declaration//GEN-END:variables

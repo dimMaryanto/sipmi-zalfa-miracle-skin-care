@@ -18,6 +18,8 @@ import java.util.List;
 public interface RepoPenjualan extends BaseRepository<Penjualan, String> {
 
     public Penjualan save(Penjualan p, List<PenjualanDetail> barangJual) throws SQLException;
+    
+    public List<Penjualan> findPenjualanByTglBetween(Date awal, Date akhir) throws SQLException;
 
     public List<PenjualanDetail> findPenjualanDetailByPenjualanKode(String kode) throws SQLException;
 

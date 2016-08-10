@@ -533,4 +533,42 @@ public class ServicePenjualan implements RepoPenjualan {
         return list;
     }
 
+    @Override
+    public List<Penjualan> findPenjualanByTglBetween(Date awal, Date akhir) throws SQLException{
+        String sql = "SELECT \n"
+                + "    j.kode as kode_penjualan,\n"
+                + "    j.tgl as tanggal_penjualan,\n"
+                + "    p.kode as kode_pelanggan,\n"
+                + "    p.nama as nama_pelanggan,\n"
+                + "    p.alamat as alamat_pelanggan,\n"
+                + "    p.notlp as tlp_pelanggan,\n"
+                + "    p.agen as pelanggan_agen\n"
+                + "FROM penjualan j JOIN pelanggan p ON (j.kode_pelanggan = p.kode)"
+                + "WHERE j.tgl between ? and ?";
+        Connection connect = ds.getConnection();
+        List<Penjualan> list = new ArrayList<>();
+        PreparedStatement ps = connect.prepareStatement(sql);
+        ps.setDate(1, awal);
+        ps.setDate(2, akhir);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Penjualan j = new Penjualan();
+            j.setKode(rs.getString("kode_penjualan"));
+            j.setTgl(rs.getDate("tanggal_penjualan"));
+
+            Pelanggan p = new Pelanggan();
+            p.setKode(rs.getString("kode_pelanggan"));
+            p.setNama(rs.getString("nama_pelanggan"));
+            p.setAlamat(rs.getString("alamat_pelanggan"));
+            p.setTlp(rs.getString("tlp_pelanggan"));
+            p.setAgen(rs.getBoolean("pelanggan_agen"));
+            j.setPelanggan(p);
+            list.add(j);
+        }
+
+        ps.close();
+        rs.close();
+        connect.close();
+        return list;}
+
 }
