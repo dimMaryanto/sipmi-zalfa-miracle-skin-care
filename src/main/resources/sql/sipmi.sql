@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS pelanggan (
     agen boolean not null default 0
 ) ENGINE=InnoDB;
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 --
 -- Table structure for table supplier
 --
